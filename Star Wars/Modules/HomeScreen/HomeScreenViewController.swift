@@ -6,3 +6,31 @@
 //
 
 import Foundation
+import UIKit
+
+class HomeScreenViewController: UIViewController {
+    
+    var presenter: ViewToPresenterHomeScreenProtocol?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        presenter?.viewDidLoad()
+    }
+}
+
+extension HomeScreenViewController: PresenterToViewHomeScreenProtocol {
+    func onGetCharacterListSucess(_ starWarsCharacter: StarWarsCharacter) {
+        lazy var loginView: HomeScreenView = {
+            let view = HomeScreenView()
+            view.setup(starWarsCharacter: starWarsCharacter)
+            return view
+        }()
+    }
+    
+    func onGetCharacterListError(_ starWarsCharacter: StarWarsCharacter) {
+        
+    }
+}
+
+

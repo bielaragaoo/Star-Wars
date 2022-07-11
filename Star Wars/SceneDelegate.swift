@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         self.window?.rootViewController = navigationController
         
-        let viewController = ViewController()
+        let viewController = HomeScreenView()
         navigationController.pushViewController(viewController, animated: true)
     }
 

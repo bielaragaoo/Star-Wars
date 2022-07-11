@@ -13,8 +13,14 @@ class HomeScreenInteractor: PresenterToInteractorHomeScreenProtocol {
     var presenter: InteractorToPresenterHomeScreenProtocol?
     var character: StarWarsCharacter?
     
+    private let domain: HomeScreenDomain
+    
+    init(domain: HomeScreenDomain){
+    self.domain = domain
+    }
+    
     func getCharacters() {
-        p
+        domain.getCharacterList()
     }
     
     

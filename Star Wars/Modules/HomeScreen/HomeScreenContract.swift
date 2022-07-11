@@ -15,7 +15,7 @@ protocol PresenterToViewHomeScreenProtocol {
 
 protocol ViewToPresenterHomeScreenProtocol {
     var view: PresenterToViewHomeScreenProtocol? { get set }
-    var interactor: InteractorToPresenterHomeScreenProtocol? { get set }
+    var interactor: PresenterToInteractorHomeScreenProtocol? { get set }
     var router: PresenterToRouterHomeScreenProtocol? { get set }
     
     func viewDidLoad()
