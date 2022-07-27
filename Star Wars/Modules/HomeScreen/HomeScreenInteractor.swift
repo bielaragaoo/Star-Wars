@@ -11,7 +11,7 @@ import Foundation
 class HomeScreenInteractor: PresenterToInteractorHomeScreenProtocol {
     
     var character: StarWarsCharacter?
-    var delegate: HomeScreenCharacterListResponseProtocol? 
+    var delegate: InteractorToPresenterHomeScreenProtocol?
     
     private let domain: HomeScreenDomain
     
@@ -27,14 +27,15 @@ class HomeScreenInteractor: PresenterToInteractorHomeScreenProtocol {
 extension HomeScreenInteractor: HomeScreenCharacterListResponseProtocol {
     func responseGetCharacterListSuccess(data: StarWarsCharacter?) {
         if let data = data {
-            delegate?.responseGetCharacterListSuccess(data: data)
+            delegate?.onGetCharacterListSucess(data)
         } else {
-            delegate?.responseGetCharacterListError(error: data as? Error)
+            delegate?.onGetCharacterListError()
+            
         }
     }
     
     func responseGetCharacterListError(error: Error?) {
-        delegate?.responseGetCharacterListError(error: error)
+        delegate?.onGetCharacterListError()
     }
     
     

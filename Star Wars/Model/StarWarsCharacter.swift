@@ -9,7 +9,7 @@ import Foundation
 
 struct StarWarsCharacter: Codable {
     
-    let result: [StarWarsCharacterResult]?
+    let results: [StarWarsCharacterResult]?
 }
 
 struct StarWarsCharacterResult: Codable {
@@ -19,7 +19,7 @@ struct StarWarsCharacterResult: Codable {
     let gender: String?
     let name: String?
     let homeWorld: String?
-    let species: String?
+    let species: [String?]
     let height: String?
     let mass: String?
     let skinColor: String?
@@ -29,7 +29,7 @@ struct StarWarsCharacterResult: Codable {
         case eyeColor = "eye_color"
         case gender
         case name
-        case homeWorld
+        case homeWorld = "homeworld"
         case species
         case height
         case mass

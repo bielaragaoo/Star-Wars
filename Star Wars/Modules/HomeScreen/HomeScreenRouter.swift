@@ -15,15 +15,17 @@ class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
         let interactor = HomeScreenInteractor(domain: domain)
         
         
-        domain.responseCharacterList = interactor as? HomeScreenCharacterListResponseProtocol
+        domain.responseCharacterList = interactor
         
         let viewController = HomeScreenView()
         let navigationController = UINavigationController(rootViewController: viewController)
         
-        let presenter: ViewToPresenterHomeScreenProtocol & HomeScreenCharacterListResponseProtocol = HomeScreenPresenter()
+        let presenter: ViewToPresenterHomeScreenProtocol & InteractorToPresenterHomeScreenProtocol = HomeScreenPresenter()
         viewController.presenter = presenter
         viewController.presenter?.interactor = interactor
-        interactor.delegate = interactor
+        viewController.presenter?.view = viewController
+        interactor.delegate = presenter
+        
       
         return navigationController
     }
