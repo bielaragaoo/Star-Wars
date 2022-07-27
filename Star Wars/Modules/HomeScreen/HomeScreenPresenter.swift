@@ -19,14 +19,18 @@ class HomeScreenPresenter: ViewToPresenterHomeScreenProtocol {
     }
 }
 
-extension HomeScreenPresenter: InteractorToPresenterHomeScreenProtocol {
-    func onGetCharacterListSucess(_ starWarsCharacter: StarWarsCharacter) {
-        view?.onGetCharacterListSucess(starWarsCharacter)
-    }
-    
-    func onGetCharacterListError(_ starWarsCharacter: StarWarsCharacter) {
-        view?.onGetCharacterListError(starWarsCharacter)
+extension HomeScreenPresenter: HomeScreenCharacterListResponseProtocol {
+    func responseGetCharacterListError(error: Error?) {
+        view?.onGetCharacterListError(error!)
     }
     
     
+    func responseGetCharacterListSuccess(data: StarWarsCharacter?) {
+        if let data = data {
+            view?.onGetCharacterListSucess(data)
+        } else {
+            view?.onGetCharacterListError(data as! Error)
+        }
+    }
 }
+

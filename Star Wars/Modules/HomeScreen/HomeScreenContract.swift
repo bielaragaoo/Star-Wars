@@ -10,7 +10,7 @@ import UIKit
 
 protocol PresenterToViewHomeScreenProtocol {
     func onGetCharacterListSucess(_ starWarsCharacter: StarWarsCharacter)
-    func onGetCharacterListError(_ starWarsCharacter: StarWarsCharacter)
+    func onGetCharacterListError(_ error: Error)
 }
 
 protocol ViewToPresenterHomeScreenProtocol {
@@ -22,17 +22,11 @@ protocol ViewToPresenterHomeScreenProtocol {
 }
 
 protocol PresenterToInteractorHomeScreenProtocol {
-    var presenter: InteractorToPresenterHomeScreenProtocol? { get set }
     var character: StarWarsCharacter? { get set }
     
     func getCharacters()
 }
 
 protocol PresenterToRouterHomeScreenProtocol {
-    static func createModule(with starWarsCharacter: StarWarsCharacter)
-}
-
-protocol InteractorToPresenterHomeScreenProtocol {
-    func onGetCharacterListSucess(_ starWarsCharacter: StarWarsCharacter)
-    func onGetCharacterListError(_ starWarsCharacter: StarWarsCharacter)
+    static func createModule() -> UINavigationController
 }

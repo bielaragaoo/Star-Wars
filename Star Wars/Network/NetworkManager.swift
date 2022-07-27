@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class NetworkManager {
+class NetworkManager: Decodable {
     
     static let sharedInstance = NetworkManager()
     

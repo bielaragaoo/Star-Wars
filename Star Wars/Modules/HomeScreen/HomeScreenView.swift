@@ -13,6 +13,7 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
     var identifier = "Cell reuse identifier"
     func setup (starWarsCharacter: StarWarsCharacter) {
         label = starWarsCharacter.result?.first?.name
+        print("label: \(label)")
         
     }
     
@@ -31,7 +32,6 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         presenter?.viewDidLoad()
         characterListTableView.delegate = self
         characterListTableView.dataSource = self
@@ -49,7 +49,7 @@ extension HomeScreenView: PresenterToViewHomeScreenProtocol {
         }()
     }
     
-    func onGetCharacterListError(_ starWarsCharacter: StarWarsCharacter) {
+    func onGetCharacterListError(_ error: Error) {
         
     }
 }

@@ -28,7 +28,6 @@
 		295215C72870C4E500447B22 /* HomeScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215C62870C4E500447B22 /* HomeScreenInteractor.swift */; };
 		295215C92870C4F200447B22 /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215C82870C4F200447B22 /* HomeScreenPresenter.swift */; };
 		295215CB2870C4FC00447B22 /* HomeScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215CA2870C4FC00447B22 /* HomeScreenRouter.swift */; };
-		295215CD2870C50700447B22 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215CC2870C50700447B22 /* HomeScreenViewController.swift */; };
 		295215D02870C66100447B22 /* StarWarsCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215CF2870C66100447B22 /* StarWarsCharacter.swift */; };
 		295215D42870CE9A00447B22 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215D32870CE9A00447B22 /* RequestHandler.swift */; };
 		295215D62870CEB500447B22 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215D52870CEB500447B22 /* ResponseHandler.swift */; };
@@ -82,7 +81,6 @@
 		295215C62870C4E500447B22 /* HomeScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenInteractor.swift; sourceTree = "<group>"; };
 		295215C82870C4F200447B22 /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		295215CA2870C4FC00447B22 /* HomeScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenRouter.swift; sourceTree = "<group>"; };
-		295215CC2870C50700447B22 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		295215CF2870C66100447B22 /* StarWarsCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsCharacter.swift; sourceTree = "<group>"; };
 		295215D32870CE9A00447B22 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		295215D52870CEB500447B22 /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 				295215C62870C4E500447B22 /* HomeScreenInteractor.swift */,
 				295215C82870C4F200447B22 /* HomeScreenPresenter.swift */,
 				295215CA2870C4FC00447B22 /* HomeScreenRouter.swift */,
-				295215CC2870C50700447B22 /* HomeScreenViewController.swift */,
 				2945B01F287B9F3600316D2A /* HomeScreenViewTableViewCell.swift */,
 				2945B021287BA69200316D2A /* HomeScreenView.swift */,
 				2945B022287BA69200316D2A /* HomeScreenView.xib */,
@@ -558,7 +555,6 @@
 			files = (
 				291B5C1F2870E4C300B56100 /* NetworkManager.swift in Sources */,
 				295215CB2870C4FC00447B22 /* HomeScreenRouter.swift in Sources */,
-				295215CD2870C50700447B22 /* HomeScreenViewController.swift in Sources */,
 				295215D62870CEB500447B22 /* ResponseHandler.swift in Sources */,
 				295215C92870C4F200447B22 /* HomeScreenPresenter.swift in Sources */,
 				295215932870BF7F00447B22 /* AppDelegate.swift in Sources */,

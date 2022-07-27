@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-let baseUrl = "swapi.dev/api/"
+let baseUrl = "https://swapi.dev/api/"
 
 enum EndPoint {
     case getCharacterList
