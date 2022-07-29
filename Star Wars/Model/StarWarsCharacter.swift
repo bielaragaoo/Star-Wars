@@ -9,7 +9,7 @@ import Foundation
 
 struct StarWarsCharacter: Codable {
     
-    let results: [StarWarsCharacterResult]?
+    let results: [StarWarsCharacterResult]
 }
 
 struct StarWarsCharacterResult: Codable {
