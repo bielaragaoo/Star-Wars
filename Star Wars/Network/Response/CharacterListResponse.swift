@@ -8,6 +8,7 @@
 import Foundation
 
 class CharacterListResponse: ResponseHandler{
+    
     var starWarsCharacters: StarWarsCharacter?
     
     override func parseModel() throws {

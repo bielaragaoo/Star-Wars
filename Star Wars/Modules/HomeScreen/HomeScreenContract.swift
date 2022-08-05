@@ -18,17 +18,17 @@ protocol ViewToPresenterHomeScreenProtocol {
     var interactor: PresenterToInteractorHomeScreenProtocol? { get set }
     var router: PresenterToRouterHomeScreenProtocol? { get set }
     
-    func viewDidLoad()
+    func viewDidLoad(path: String?)
 }
 
 protocol PresenterToInteractorHomeScreenProtocol {
-    var character: StarWarsCharacter? { get set }
     
-    func getCharacters()
+    func getCharacters(path: String?)
 }
 
 protocol PresenterToRouterHomeScreenProtocol {
     static func createModule() -> UINavigationController
+    func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, speciePath: String?, homeWorldPath: String?)
 }
 
 protocol InteractorToPresenterHomeScreenProtocol {

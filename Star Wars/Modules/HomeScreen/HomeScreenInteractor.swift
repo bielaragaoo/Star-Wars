@@ -10,7 +10,6 @@ import Foundation
 
 class HomeScreenInteractor: PresenterToInteractorHomeScreenProtocol {
     
-    var character: StarWarsCharacter?
     var delegate: InteractorToPresenterHomeScreenProtocol?
     
     private let domain: HomeScreenDomain
@@ -19,8 +18,8 @@ class HomeScreenInteractor: PresenterToInteractorHomeScreenProtocol {
     self.domain = domain
     }
     
-    func getCharacters() {
-        domain.getCharacterList()
+    func getCharacters(path: String?) {
+        domain.getCharacterList(path: path)
     }
 }
 

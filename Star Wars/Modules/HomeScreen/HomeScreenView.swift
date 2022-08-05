@@ -12,28 +12,40 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
     var label: String?
     var identifier = "Cell reuse identifier"
     var starData: StarWarsCharacter?
+    var characters: [StarWarsCharacterResult?]?
+    var indexNext: String?
+    
+    
     @IBOutlet weak var characterListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
+        presenter?.viewDidLoad(path: nil)
+        characterListTableView.prefetchDataSource = self
         characterListTableView.delegate = self
         characterListTableView.dataSource = self
         characterListTableView.register(HomeScreenViewTableViewCell.self, forCellReuseIdentifier: identifier)
-
     }
     
     func tableView(_ characterListTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print (starData?.results.count)
-        return starData?.results.count ?? 1
+        return characters?.count ?? 1
     }
     
     func tableView(_ characterListTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = characterListTableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeScreenViewTableViewCell
-        cell.label.text = starData?.results[indexPath.row].name
-        print(cell.label.text)
+
+        cell.setup(starData: characters?[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(characters?[indexPath.row] != nil){
+            presenter?.router?.pushToDetailScreen(on: self, speciePath: characters![indexPath.row]!.species.first!!, homeWorldPath: characters![indexPath.row]!.homeWorld ?? "")
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    
     }
     
 }
@@ -41,6 +53,12 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
 extension HomeScreenView: PresenterToViewHomeScreenProtocol {
     func onGetCharacterListSucess(_ starWarsCharacter: StarWarsCharacter) {
         self.starData = starWarsCharacter
+        if characters == nil {
+            self.characters = starWarsCharacter.results
+        } else {
+            self.characters! += starWarsCharacter.results
+        }
+            
         self.characterListTableView.reloadData()
     }
     
@@ -48,3 +66,11 @@ extension HomeScreenView: PresenterToViewHomeScreenProtocol {
     }
 }
 
+extension HomeScreenView: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        if indexNext != starData?.next && starData?.next != nil {
+        presenter?.viewDidLoad(path: starData?.next)
+            indexNext = starData?.next
+        }
+    }
+}

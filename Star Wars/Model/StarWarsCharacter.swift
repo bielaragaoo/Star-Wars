@@ -10,6 +10,7 @@ import Foundation
 struct StarWarsCharacter: Codable {
     
     let results: [StarWarsCharacterResult]
+    let next: String?
 }
 
 struct StarWarsCharacterResult: Codable {
@@ -23,6 +24,7 @@ struct StarWarsCharacterResult: Codable {
     let height: String?
     let mass: String?
     let skinColor: String?
+    let url: String?
     
     enum CodingKeys: String, CodingKey {
         case birthYear = "birth_year"
@@ -34,6 +36,7 @@ struct StarWarsCharacterResult: Codable {
         case height
         case mass
         case skinColor = "skin_color"
+        case url
     }
 }
 

@@ -14,8 +14,8 @@ class HomeScreenPresenter: ViewToPresenterHomeScreenProtocol {
     
     var router: PresenterToRouterHomeScreenProtocol?
     
-    func viewDidLoad() {
-        interactor?.getCharacters()
+    func viewDidLoad(path: String?) {
+        interactor?.getCharacters(path: path)
     }
 }
 

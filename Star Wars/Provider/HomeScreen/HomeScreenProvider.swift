@@ -13,12 +13,12 @@ class HomeScreenProvider {
 }
 
 protocol HomeScreenProviderProtocol {
-    func getCharacterList (sucessCallback: @escaping(StarWarsCharacter?) -> Void, failureCallback: @escaping (Error?) -> Void)
+    func getCharacterList (path: String?, sucessCallback: @escaping(StarWarsCharacter?) -> Void, failureCallback: @escaping (Error?) -> Void)
 }
 
 extension HomeScreenProvider: HomeScreenProviderProtocol {
-    func getCharacterList(sucessCallback: @escaping (StarWarsCharacter?) -> Void, failureCallback: @escaping (Error?) -> Void) {
-        NetworkManager.sharedInstance.request(request: characterListRequest) { (response: CharacterListResponse) in
+    func getCharacterList(path: String?, sucessCallback: @escaping (StarWarsCharacter?) -> Void, failureCallback: @escaping (Error?) -> Void) {
+        NetworkManager.sharedInstance.request(path: path, request: characterListRequest) { (response: CharacterListResponse) in
             if let error = response.error {
                 failureCallback(error)
                 return

@@ -33,6 +33,19 @@
 		295215D62870CEB500447B22 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215D52870CEB500447B22 /* ResponseHandler.swift */; };
 		295215D92870D58C00447B22 /* ReferencesStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215D82870D58C00447B22 /* ReferencesStrings.swift */; };
 		295215DB2870D6BE00447B22 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295215DA2870D6BE00447B22 /* NetworkStatus.swift */; };
+		295BCAA2289C8E200046BD28 /* DetailScreenContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAA1289C8E200046BD28 /* DetailScreenContract.swift */; };
+		295BCAA4289C8E9F0046BD28 /* DetailScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAA3289C8E9F0046BD28 /* DetailScreenInteractor.swift */; };
+		295BCAA6289C8EB90046BD28 /* DetailScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAA5289C8EB90046BD28 /* DetailScreenPresenter.swift */; };
+		295BCAA8289C8EDA0046BD28 /* DetailScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAA7289C8EDA0046BD28 /* DetailScreenRouter.swift */; };
+		295BCAAA289C8EFC0046BD28 /* DetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAA9289C8EFC0046BD28 /* DetailScreenView.swift */; };
+		295BCAAC289C905D0046BD28 /* Specie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAAB289C905D0046BD28 /* Specie.swift */; };
+		295BCAAE289C909B0046BD28 /* HomeWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAAD289C909B0046BD28 /* HomeWorld.swift */; };
+		295BCAB0289C91570046BD28 /* SpecieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAAF289C91570046BD28 /* SpecieResponse.swift */; };
+		295BCAB2289C92D70046BD28 /* HomeWorldResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAB1289C92D70046BD28 /* HomeWorldResponse.swift */; };
+		295BCAB4289C952E0046BD28 /* HomeWorldRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAB3289C952E0046BD28 /* HomeWorldRequest.swift */; };
+		295BCAB6289C955F0046BD28 /* SpecieRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAB5289C955F0046BD28 /* SpecieRequest.swift */; };
+		295BCAB9289C960A0046BD28 /* DetailScreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCAB8289C960A0046BD28 /* DetailScreenProvider.swift */; };
+		295BCABB289C9F650046BD28 /* DetailScreenDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCABA289C9F650046BD28 /* DetailScreenDomain.swift */; };
 		52C745B2589D2BBB0E507814 /* Pods_Star_Wars_Star_WarsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B630B56195AA5A80E316CEA /* Pods_Star_Wars_Star_WarsUITests.framework */; };
 		58CF76A4AF9990947BDCD4C7 /* Pods_Star_WarsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9262778B254CF0EDCDCFCB /* Pods_Star_WarsTests.framework */; };
 		9663C5D4F79EF5A2278589F5 /* Pods_Star_Wars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE2433A04C3614A1685B303 /* Pods_Star_Wars.framework */; };
@@ -86,6 +99,19 @@
 		295215D52870CEB500447B22 /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
 		295215D82870D58C00447B22 /* ReferencesStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesStrings.swift; sourceTree = "<group>"; };
 		295215DA2870D6BE00447B22 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
+		295BCAA1289C8E200046BD28 /* DetailScreenContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenContract.swift; sourceTree = "<group>"; };
+		295BCAA3289C8E9F0046BD28 /* DetailScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenInteractor.swift; sourceTree = "<group>"; };
+		295BCAA5289C8EB90046BD28 /* DetailScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenPresenter.swift; sourceTree = "<group>"; };
+		295BCAA7289C8EDA0046BD28 /* DetailScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenRouter.swift; sourceTree = "<group>"; };
+		295BCAA9289C8EFC0046BD28 /* DetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenView.swift; sourceTree = "<group>"; };
+		295BCAAB289C905D0046BD28 /* Specie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Specie.swift; sourceTree = "<group>"; };
+		295BCAAD289C909B0046BD28 /* HomeWorld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorld.swift; sourceTree = "<group>"; };
+		295BCAAF289C91570046BD28 /* SpecieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecieResponse.swift; sourceTree = "<group>"; };
+		295BCAB1289C92D70046BD28 /* HomeWorldResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorldResponse.swift; sourceTree = "<group>"; };
+		295BCAB3289C952E0046BD28 /* HomeWorldRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorldRequest.swift; sourceTree = "<group>"; };
+		295BCAB5289C955F0046BD28 /* SpecieRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecieRequest.swift; sourceTree = "<group>"; };
+		295BCAB8289C960A0046BD28 /* DetailScreenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenProvider.swift; sourceTree = "<group>"; };
+		295BCABA289C9F650046BD28 /* DetailScreenDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenDomain.swift; sourceTree = "<group>"; };
 		3E9262778B254CF0EDCDCFCB /* Pods_Star_WarsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star_WarsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE2433A04C3614A1685B303 /* Pods_Star_Wars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star_Wars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B630B56195AA5A80E316CEA /* Pods_Star_Wars_Star_WarsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star_Wars_Star_WarsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				291B5C182870DF0000B56100 /* CharacterListResponse.swift */,
+				295BCAAF289C91570046BD28 /* SpecieResponse.swift */,
+				295BCAB1289C92D70046BD28 /* HomeWorldResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -150,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				291B5C142870DB6F00B56100 /* CharacterListRequest.swift */,
+				295BCAB3289C952E0046BD28 /* HomeWorldRequest.swift */,
+				295BCAB5289C955F0046BD28 /* SpecieRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -157,6 +187,7 @@
 		291B5C1A2870E30700B56100 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
+				295BCAB7289C95F10046BD28 /* DetailScreen */,
 				291B5C1B2870E33900B56100 /* HomeScreen */,
 			);
 			path = Provider;
@@ -174,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				291B5C212870E82900B56100 /* HomeScreenDomain.swift */,
+				295BCABA289C9F650046BD28 /* DetailScreenDomain.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -238,6 +270,7 @@
 		295215C22870C3EA00447B22 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				295BCAA0289C8DF20046BD28 /* DetailScreen */,
 				295215C32870C43B00447B22 /* HomeScreen */,
 			);
 			path = Modules;
@@ -262,6 +295,8 @@
 			children = (
 				295215CF2870C66100447B22 /* StarWarsCharacter.swift */,
 				291B5C162870DC0B00B56100 /* APIConfig.swift */,
+				295BCAAB289C905D0046BD28 /* Specie.swift */,
+				295BCAAD289C909B0046BD28 /* HomeWorld.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +337,26 @@
 				291B5C102870DA3C00B56100 /* NetworkInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		295BCAA0289C8DF20046BD28 /* DetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				295BCAA1289C8E200046BD28 /* DetailScreenContract.swift */,
+				295BCAA3289C8E9F0046BD28 /* DetailScreenInteractor.swift */,
+				295BCAA5289C8EB90046BD28 /* DetailScreenPresenter.swift */,
+				295BCAA7289C8EDA0046BD28 /* DetailScreenRouter.swift */,
+				295BCAA9289C8EFC0046BD28 /* DetailScreenView.swift */,
+			);
+			path = DetailScreen;
+			sourceTree = "<group>";
+		};
+		295BCAB7289C95F10046BD28 /* DetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				295BCAB8289C960A0046BD28 /* DetailScreenProvider.swift */,
+			);
+			path = DetailScreen;
 			sourceTree = "<group>";
 		};
 		FDCDAD014A292A6066124028 /* Frameworks */ = {
@@ -554,25 +609,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				291B5C1F2870E4C300B56100 /* NetworkManager.swift in Sources */,
+				295BCAB6289C955F0046BD28 /* SpecieRequest.swift in Sources */,
+				295BCAB0289C91570046BD28 /* SpecieResponse.swift in Sources */,
 				295215CB2870C4FC00447B22 /* HomeScreenRouter.swift in Sources */,
 				295215D62870CEB500447B22 /* ResponseHandler.swift in Sources */,
+				295BCABB289C9F650046BD28 /* DetailScreenDomain.swift in Sources */,
 				295215C92870C4F200447B22 /* HomeScreenPresenter.swift in Sources */,
 				295215932870BF7F00447B22 /* AppDelegate.swift in Sources */,
 				295215D92870D58C00447B22 /* ReferencesStrings.swift in Sources */,
+				295BCAAA289C8EFC0046BD28 /* DetailScreenView.swift in Sources */,
 				295215C72870C4E500447B22 /* HomeScreenInteractor.swift in Sources */,
 				295215DB2870D6BE00447B22 /* NetworkStatus.swift in Sources */,
 				291B5C222870E82900B56100 /* HomeScreenDomain.swift in Sources */,
 				291B5C1D2870E34D00B56100 /* HomeScreenProvider.swift in Sources */,
 				291B5C192870DF0000B56100 /* CharacterListResponse.swift in Sources */,
+				295BCAA6289C8EB90046BD28 /* DetailScreenPresenter.swift in Sources */,
 				2945B023287BA69200316D2A /* HomeScreenView.swift in Sources */,
+				295BCAB4289C952E0046BD28 /* HomeWorldRequest.swift in Sources */,
 				295215D42870CE9A00447B22 /* RequestHandler.swift in Sources */,
 				291B5C172870DC0B00B56100 /* APIConfig.swift in Sources */,
+				295BCAB9289C960A0046BD28 /* DetailScreenProvider.swift in Sources */,
+				295BCAAC289C905D0046BD28 /* Specie.swift in Sources */,
+				295BCAAE289C909B0046BD28 /* HomeWorld.swift in Sources */,
 				295215C52870C4D700447B22 /* HomeScreenContract.swift in Sources */,
+				295BCAA2289C8E200046BD28 /* DetailScreenContract.swift in Sources */,
 				291B5C112870DA3C00B56100 /* NetworkInteractor.swift in Sources */,
+				295BCAB2289C92D70046BD28 /* HomeWorldResponse.swift in Sources */,
 				291B5C152870DB6F00B56100 /* CharacterListRequest.swift in Sources */,
 				2945B020287B9F3600316D2A /* HomeScreenViewTableViewCell.swift in Sources */,
 				295215D02870C66100447B22 /* StarWarsCharacter.swift in Sources */,
 				295215952870BF7F00447B22 /* SceneDelegate.swift in Sources */,
+				295BCAA4289C8E9F0046BD28 /* DetailScreenInteractor.swift in Sources */,
+				295BCAA8289C8EDA0046BD28 /* DetailScreenRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

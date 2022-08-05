@@ -19,9 +19,9 @@ class NetworkManager: Decodable {
         return manager
     }()
     
-    func request<T: RequestHandler, U: ResponseHandler>(request: T, completion: @escaping (U) -> Void) {
+    func request<T: RequestHandler, U: ResponseHandler>(path: String?, request: T, completion: @escaping (U) -> Void) {
             
-            manager.request(request.path(),
+            manager.request(path ?? request.path(),
                             method: request.httpMethod().alamofireMethod,
                             parameters: request.parameters(),
                             encoding: request.encoding().alamofireEncoding,
@@ -33,4 +33,20 @@ class NetworkManager: Decodable {
                     completion(responseObject)
                 }
         }
+    
+    func customRequest<T: RequestHandler, U: ResponseHandler>(path: String, request: T, completion: @escaping (U) -> Void) {
+            
+            manager.request(path,
+                            method: request.httpMethod().alamofireMethod,
+                            parameters: request.parameters(),
+                            encoding: request.encoding().alamofireEncoding,
+                            headers: request.headers()).validate()
+                .responseJSON { (json: AFDataResponse<Any>) in
+                    
+                    let urlResponse = json.response
+                    let responseObject: U = U(with: json.data, urlResponse: urlResponse, error: json.error)
+                    completion(responseObject)
+                }
+        }
+    
 }

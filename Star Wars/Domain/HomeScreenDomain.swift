@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomeScreenDomainProtocol: AnyObject {
-    func getCharacterList()
+    func getCharacterList(path: String?)
 }
 
 protocol HomeScreenCharacterListResponseProtocol: AnyObject {
@@ -28,8 +28,8 @@ final class HomeScreenDomain {
 }
 
 extension HomeScreenDomain: HomeScreenDomainProtocol {
-    func getCharacterList() {
-        provider.getCharacterList { starWarsCharacter in
+    func getCharacterList(path: String?) {
+        provider.getCharacterList(path: path) { starWarsCharacter in
             self.responseCharacterList?.responseGetCharacterListSuccess(data: starWarsCharacter)
         } failureCallback: { error in
             self.responseCharacterList?.responseGetCharacterListError(error: error)

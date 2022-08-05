@@ -10,27 +10,48 @@ import UIKit
 
 class HomeScreenViewTableViewCell: UITableViewCell {
     var identifier = "Cell reuse identifier"
-
-    var label: UILabel = {
+    let labelName = UILabel()
+    let labelHeight = UILabel()
+    let labelBirthYear = UILabel()
+    
+    let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.distribution = .fill
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
         
-        let labelCell = UILabel()
-        labelCell.font = UIFont.systemFont(ofSize: 18)
-        labelCell.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            labelCell.centerYAnchor.constraint(equalTo: labelCell.centerYAnchor),
-            labelCell.centerXAnchor.constraint(equalTo: labelCell.centerXAnchor)
-
-          ])
-        
-        return labelCell
+        return stack
     }()
+    
+    func configureCell(){
+        contentView.addSubview(stackView)
+        stackView.addArrangedSubview(labelName)
+        stackView.addArrangedSubview(labelHeight)
+        stackView.addArrangedSubview(labelBirthYear)
+        
+        labelName.translatesAutoresizingMaskIntoConstraints = false
+        labelHeight.translatesAutoresizingMaskIntoConstraints = false
+        labelBirthYear.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+    }
+    
+    func setup(starData: StarWarsCharacterResult?) {
+        labelName.text = starData?.name
+        labelHeight.text = starData?.height
+        labelBirthYear.text = starData?.birthYear
+    }
+    
+ 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: identifier)
-        addSubview(label)
-        }
-
-        required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-        }
+        configureCell()
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

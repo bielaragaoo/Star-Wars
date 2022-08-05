@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
+    func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, speciePath: String?, homeWorldPath: String?){
+        let detailScreenViewController = DetailScreenRouter.createModule(speciePath: speciePath, homeWorldPath: homeWorldPath)
+        let viewController = view as! HomeScreenView
+        viewController.navigationController?.pushViewController(detailScreenViewController, animated: true)
+    }
+    
     static func createModule() -> UINavigationController {
         let provider = HomeScreenProvider()
         let domain = HomeScreenDomain(provider: provider)
@@ -24,6 +30,7 @@ class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
         viewController.presenter = presenter
         viewController.presenter?.interactor = interactor
         viewController.presenter?.view = viewController
+        viewController.presenter?.router = HomeScreenRouter()
         interactor.delegate = presenter
         
       
