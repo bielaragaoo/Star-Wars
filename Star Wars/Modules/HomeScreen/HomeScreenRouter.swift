@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
-    func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, speciePath: String?, homeWorldPath: String?){
-        let detailScreenViewController = DetailScreenRouter.createModule(speciePath: speciePath, homeWorldPath: homeWorldPath)
+    func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, starWarsCharacterResult: StarWarsCharacterResult){
+        let detailScreenViewController = DetailScreenRouter.createModule(starWarsCharacterResult: starWarsCharacterResult)
         let viewController = view as! HomeScreenView
         viewController.navigationController?.pushViewController(detailScreenViewController, animated: true)
     }

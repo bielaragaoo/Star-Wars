@@ -41,7 +41,7 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(characters?[indexPath.row] != nil){
-            presenter?.router?.pushToDetailScreen(on: self, speciePath: characters![indexPath.row]!.species.first!!, homeWorldPath: characters![indexPath.row]!.homeWorld ?? "")
+            presenter?.router?.pushToDetailScreen(on: self, starWarsCharacterResult: characters![indexPath.row]!)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

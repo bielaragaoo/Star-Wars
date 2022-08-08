@@ -28,7 +28,7 @@ protocol PresenterToInteractorHomeScreenProtocol {
 
 protocol PresenterToRouterHomeScreenProtocol {
     static func createModule() -> UINavigationController
-    func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, speciePath: String?, homeWorldPath: String?)
+    func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, starWarsCharacterResult: StarWarsCharacterResult)
 }
 
 protocol InteractorToPresenterHomeScreenProtocol {

@@ -31,5 +31,5 @@ protocol ViewToPresenterDetailScreenProtocol {
 }
 
 protocol PresenterToRouterDetailScreenProtocol {
-    static func createModule(speciePath: String?, homeWorldPath: String?) -> UIViewController
+    static func createModule(starWarsCharacterResult: StarWarsCharacterResult) -> UIViewController
 }
