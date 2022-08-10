@@ -20,6 +20,7 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTabBar()
         presenter?.viewDidLoad(path: nil)
         characterListTableView.prefetchDataSource = self
         characterListTableView.delegate = self
@@ -72,5 +73,15 @@ extension HomeScreenView: UITableViewDataSourcePrefetching {
         presenter?.viewDidLoad(path: starData?.next)
             indexNext = starData?.next
         }
+    }
+}
+extension HomeScreenView{
+    
+    func setupTabBar(){
+        self.navigationItem.title = "Home Screen"
+        let searchController = UISearchController()
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self as? UISearchBarDelegate
+        self.navigationItem.searchController = searchController
     }
 }

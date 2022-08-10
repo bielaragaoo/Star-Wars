@@ -11,6 +11,7 @@ import UIKit
 class DetailScreenView: UIViewController {
     var presenter: ViewToPresenterDetailScreenProtocol?
     var starWarsCharacterResult: StarWarsCharacterResult?
+    var favoriteCharacters: [StarWarsCharacterResult]?
     var nameLabel =  UILabel()
     var birthYearLabel = UILabel()
     var eyeColorLabel = UILabel()
@@ -26,6 +27,7 @@ class DetailScreenView: UIViewController {
         let stack = UIStackView()
         stack.distribution = .fill
         stack.axis = .vertical
+        stack.alignment = .center
         stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         
@@ -35,22 +37,26 @@ class DetailScreenView: UIViewController {
         if(starWarsCharacterResult?.species.first != nil && starWarsCharacterResult?.homeWorld != nil) {
             presenter?.getCustomDetail(speciePath: (starWarsCharacterResult?.species.first!)!, homeWorldPath: (starWarsCharacterResult?.homeWorld!)! )
         }
+        presenter?.getFavorite()
         setupUI()
     }
 }
 
 extension DetailScreenView: PresenterToViewDetailScreenProtocol{
+    func onGetFavorite(starWarsCharacterResult: [StarWarsCharacterResult]?) {
+        favoriteCharacters = starWarsCharacterResult ?? []
+    }
     
     func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld) {
-        nameLabel.text = "Nome: \(starWarsCharacterResult?.name ?? "N/A")"
-        birthYearLabel.text = "Data de nascimento: \(starWarsCharacterResult?.birthYear ?? "N/A")"
-        eyeColorLabel.text = "Cor do olho: \(starWarsCharacterResult?.eyeColor ?? "N/A")"
-        genderLabel.text = "Gênero: \(starWarsCharacterResult?.gender ?? "N/A")"
-        homeWorldLabel.text = "Pais de nascença: \(homeWorld.name ?? "N/A")"
-        speciesLabel.text = "Espécie: \(specie.name ?? "N/A")"
-        heightLabel.text = "Altura: \(starWarsCharacterResult?.height ?? "N/A")"
-        massLabel.text = "Peso: \(starWarsCharacterResult?.mass ?? "N/A")"
-        skinColorLabel.text = "Cor de pele: \(starWarsCharacterResult?.skinColor ?? "N/A")"
+        nameLabel.text = "Name: \(starWarsCharacterResult?.name ?? "N/A")"
+        birthYearLabel.text = "Birth year: \(starWarsCharacterResult?.birthYear ?? "N/A")"
+        eyeColorLabel.text = "Eye color: \(starWarsCharacterResult?.eyeColor ?? "N/A")"
+        genderLabel.text = "Gender: \(starWarsCharacterResult?.gender ?? "N/A")"
+        homeWorldLabel.text = "Homeworld: \(homeWorld.name ?? "N/A")"
+        speciesLabel.text = "Specie: \(specie.name ?? "N/A")"
+        heightLabel.text = "Height: \(starWarsCharacterResult?.height ?? "N/A")"
+        massLabel.text = "Mass: \(starWarsCharacterResult?.mass ?? "N/A")"
+        skinColorLabel.text = "Skin color: \(starWarsCharacterResult?.skinColor ?? "N/A")"
     }
     
     func onGetCustomDetailError() {
@@ -61,7 +67,8 @@ extension DetailScreenView: PresenterToViewDetailScreenProtocol{
 extension DetailScreenView {
     func setupUI(){
         view.backgroundColor = .white
-        let navBar = configurateNavBar()
+        setupFavStartIcon()
+        self.navigationItem.title = "Detail Screen"
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(birthYearLabel)
         stackView.addArrangedSubview(eyeColorLabel)
@@ -72,25 +79,43 @@ extension DetailScreenView {
         stackView.addArrangedSubview(massLabel)
         stackView.addArrangedSubview(skinColorLabel)
         view.addSubview(stackView)
-        view.addSubview(navBar)
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-    func configurateNavBar() -> UINavigationBar{
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: topBarSafeArea, width: view.frame.size.width, height: 44))
-        favoriteIcon = UIImage(named: "no_favorite_icon.png")?.withTintColor(UIColor.black).withRenderingMode(.alwaysOriginal) ?? UIImage()
-        let navItem = UINavigationItem(title: "Detail Screen")
-        let favItem = UIBarButtonItem(image: favoriteIcon, style: .plain, target: self, action: #selector(fav))
-        navBar.barTintColor = UIColor.white
-        navItem.rightBarButtonItem = favItem
-        navBar.setItems([navItem], animated: false)
-        return navBar
-    }
     @objc func fav() { // remove @objc for Swift 3
-
+        if(favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
+            character.name == starWarsCharacterResult?.name
+        })){
+            favoriteCharacters?.removeAll(where: { character in
+                character.name == starWarsCharacterResult?.name
+            })
+            presenter?.saveFavorite(starWarsCharacterResult:favoriteCharacters ??  [] )
+            setFavItem(iconName: "no-fav-icon")
+        } else {
+            favoriteCharacters?.append(starWarsCharacterResult!)
+            presenter?.saveFavorite(starWarsCharacterResult: favoriteCharacters!)
+            setFavItem(iconName: "fav-icon")
+        }
     }
+    
+    func setFavItem(iconName: String) {
+        favoriteIcon = UIImage(named: "\(iconName).png")?.withTintColor(UIColor.red).withRenderingMode(.alwaysOriginal) ?? UIImage()
+        let favItem = UIBarButtonItem(image: favoriteIcon, style: .plain, target: self, action: #selector(fav))
+        self.navigationItem.setRightBarButton(favItem, animated: false)
+    }
+    
     var topBarSafeArea: CGFloat {
         return UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+    }
+    
+    func setupFavStartIcon(){
+        if(favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
+            character.name == starWarsCharacterResult?.name
+        })){
+            setFavItem(iconName: "fav-icon")
+        } else {
+            setFavItem(iconName: "no-fav-icon")
         }
+    }
 }

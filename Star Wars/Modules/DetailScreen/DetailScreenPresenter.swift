@@ -17,9 +17,19 @@ class DetailScreenPresenter: ViewToPresenterDetailScreenProtocol {
     func getCustomDetail(speciePath: String, homeWorldPath: String) {
         interactor?.getCustomDetail(speciePath: speciePath, homeWorldPath: homeWorldPath)
     }
+    func getFavorite() {
+        interactor?.getFavorite()
+    }
+    func saveFavorite(starWarsCharacterResult: [StarWarsCharacterResult]) {
+        interactor?.saveFavorite(starWarsCharacterResult: starWarsCharacterResult)
+    }
 }
 
 extension DetailScreenPresenter: InteractorToPresenterDetailScreenProtocol{
+    func onGetFavorites(starWarsCharacterResult: [StarWarsCharacterResult]?) {
+        view?.onGetFavorite(starWarsCharacterResult: starWarsCharacterResult)
+    }
+    
     func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld) {
         view?.onGetCustomDetailSuccess(specie: specie, homeWorld: homeWorld)
     }

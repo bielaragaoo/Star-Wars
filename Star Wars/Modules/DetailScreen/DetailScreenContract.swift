@@ -10,16 +10,20 @@ import UIKit
 
 protocol PresenterToInteractorDetailScreenProtocol{
     func getCustomDetail(speciePath: String, homeWorldPath: String)
+    func saveFavorite(starWarsCharacterResult: [StarWarsCharacterResult])
+    func getFavorite()
 }
 
 protocol InteractorToPresenterDetailScreenProtocol{
     func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld)
     func onGetCustomDetailError()
+    func onGetFavorites(starWarsCharacterResult: [StarWarsCharacterResult]?)
 }
 
 protocol PresenterToViewDetailScreenProtocol {
     func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld)
     func onGetCustomDetailError()
+    func onGetFavorite(starWarsCharacterResult: [StarWarsCharacterResult]?)
 }
 
 protocol ViewToPresenterDetailScreenProtocol {
@@ -28,6 +32,8 @@ protocol ViewToPresenterDetailScreenProtocol {
     var router: PresenterToRouterDetailScreenProtocol? { get set }
     
     func getCustomDetail(speciePath: String, homeWorldPath: String)
+    func getFavorite()
+    func saveFavorite(starWarsCharacterResult: [StarWarsCharacterResult])
 }
 
 protocol PresenterToRouterDetailScreenProtocol {
