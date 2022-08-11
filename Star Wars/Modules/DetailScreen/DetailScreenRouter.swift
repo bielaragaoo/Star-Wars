@@ -27,6 +27,4 @@ class DetailScreenRouter: PresenterToRouterDetailScreenProtocol {
         interactor.delegate = presenter
         return viewController
     }
-    
-    
 }
