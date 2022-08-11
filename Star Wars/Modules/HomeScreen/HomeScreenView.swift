@@ -39,8 +39,6 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             return filterCharacters?.count ?? 1
         }
-        
-       
     }
     
     func tableView(_ characterListTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,7 +63,6 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-    
     }
 }
 
@@ -77,7 +74,7 @@ extension HomeScreenView: PresenterToViewHomeScreenProtocol {
         } else {
             self.characters! += starWarsCharacter.results
         }
-            
+        
         self.characterListTableView.reloadData()
     }
     
@@ -88,7 +85,7 @@ extension HomeScreenView: PresenterToViewHomeScreenProtocol {
 extension HomeScreenView: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         if indexNext != starData?.next && starData?.next != nil {
-        presenter?.viewDidLoad(path: starData?.next)
+            presenter?.viewDidLoad(path: starData?.next)
             indexNext = starData?.next
         }
     }

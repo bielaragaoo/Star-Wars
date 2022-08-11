@@ -9,19 +9,26 @@ import Foundation
 import UIKit
 
 protocol PresenterToInteractorDetailScreenProtocol{
-    func getCustomDetail(speciePath: String, homeWorldPath: String)
+    func getSpecie(speciePath: String)
+    func getHomeWorld(homeWorldPath: String)
     func saveFavorite(starWarsCharacterResult: [StarWarsCharacterResult])
     func getFavorite()
 }
 
 protocol InteractorToPresenterDetailScreenProtocol{
-    func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld)
-    func onGetCustomDetailError()
+    func onGetSpecieSuccess(specie: Specie)
+    func onGetHomeWorldSucvess (homeWorld: HomeWorld)
+    func onGetSpecieError()
+    func onGetHomeWorldError()
     func onGetFavorites(starWarsCharacterResult: [StarWarsCharacterResult]?)
 }
 
 protocol PresenterToViewDetailScreenProtocol {
     func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld)
+    func onGetSpecieSuccess(specie: Specie)
+    func onGetHomeWorldSucvess (homeWorld: HomeWorld)
+    func onGetSpecieError()
+    func onGetHomeWorldError()
     func onGetCustomDetailError()
     func onGetFavorite(starWarsCharacterResult: [StarWarsCharacterResult]?)
 }
@@ -31,7 +38,8 @@ protocol ViewToPresenterDetailScreenProtocol {
     var interactor: PresenterToInteractorDetailScreenProtocol? { get set }
     var router: PresenterToRouterDetailScreenProtocol? { get set }
     
-    func getCustomDetail(speciePath: String, homeWorldPath: String)
+    func getSpecie(speciePath: String)
+    func getHomeWorld(homeWorldPath: String)
     func getFavorite()
     func saveFavorite(starWarsCharacterResult: [StarWarsCharacterResult])
 }
