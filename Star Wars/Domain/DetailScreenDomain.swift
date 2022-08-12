@@ -8,12 +8,16 @@
 import Foundation
 
 protocol DetailScreenDomainProtocol {
-    func getCustomDetail (speciePath: String, homeWorldPath: String)
+    func getSpecieDetail (speciePath: String)
+    func getHomeWorldDetail (homeWorldPath: String)
 }
 
 protocol DetailScreenResponseProtocol: AnyObject {
-    func responseCustomDetailSuccess(specieData: Specie, homeWorldData: HomeWorld)
-    func responseCustomDetailError(error: Error?)
+    func responseSpecieSucess(specieData: Specie)
+    func responseHomeWorldSucess(homeWorldData: HomeWorld)
+   
+    func responseSpecieError(error: Error?)
+    func responseHomeWorldError(error: Error?)
 }
 
 final class DetailScreenDomain {
@@ -28,11 +32,19 @@ final class DetailScreenDomain {
 }
 
 extension DetailScreenDomain: DetailScreenDomainProtocol {
-    func getCustomDetail(speciePath: String, homeWorldPath: String) {
-        provider.getCustomDetail(pathSpecie: speciePath, pathHomeWorld: homeWorldPath) { specie, homeWorld in
-            self.responseDetailCustom?.responseCustomDetailSuccess(specieData: specie, homeWorldData: homeWorld)
+    func getHomeWorldDetail(homeWorldPath: String) {
+        provider.getHomeWorldDetail(pathHomeWorld: homeWorldPath){ homeWorld in
+            self.responseDetailCustom?.responseHomeWorldSucess(homeWorldData: homeWorld)
         } failureCallback: { error in
-            self.responseDetailCustom?.responseCustomDetailError(error: error)
+            self.responseDetailCustom?.responseHomeWorldError(error: error)
+        }
+    }
+
+    func getSpecieDetail(speciePath: String) {
+        provider.getSpecieDetail(pathSpecie: speciePath) { specie in
+            self.responseDetailCustom?.responseSpecieSucess(specieData: specie)
+        } failureCallback: { error in
+            self.responseDetailCustom?.responseSpecieError(error: error)
         }
     }
 }

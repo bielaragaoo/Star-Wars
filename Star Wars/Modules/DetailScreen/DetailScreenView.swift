@@ -34,33 +34,53 @@ class DetailScreenView: UIViewController {
         return stack
     }()
     override func viewDidLoad() {
-        if(starWarsCharacterResult?.species.first != nil && starWarsCharacterResult?.homeWorld != nil) {
-            presenter?.getCustomDetail(speciePath: (starWarsCharacterResult?.species.first!)!, homeWorldPath: (starWarsCharacterResult?.homeWorld!)! )
+        if(starWarsCharacterResult?.species.first != nil) {
+            presenter?.getSpecie(speciePath: (starWarsCharacterResult?.species.first ?? nil)!)
+        } else {
+            speciesLabel.text = "Specie: N/A"
         }
+        
+        if(starWarsCharacterResult?.homeWorld != nil) {
+            presenter?.getHomeWorld(homeWorldPath: (starWarsCharacterResult?.homeWorld)!)
+        } else {
+            homeWorldLabel.text = "HomeWorld: N/A"
+        }
+        
         presenter?.getFavorite()
+        setupLabel()
         setupUI()
     }
 }
 
 extension DetailScreenView: PresenterToViewDetailScreenProtocol{
+    func onGetSpecieSuccess(specie: Specie) {
+        speciesLabel.text = "Specie: \(specie.name ?? "N/A")"
+    }
+    
+    func onGetHomeWorldSucess(homeWorld: HomeWorld) {
+        homeWorldLabel.text = "Homeworld: \(homeWorld.name ?? "N/A")"
+    }
+    
+    func onGetSpecieError() {
+        print("error")
+    }
+    
+    func onGetHomeWorldError() {
+        print("error")
+    }
+    
     func onGetFavorite(starWarsCharacterResult: [StarWarsCharacterResult]?) {
         favoriteCharacters = starWarsCharacterResult ?? []
     }
     
-    func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld) {
+    func setupLabel() {
         nameLabel.text = "Name: \(starWarsCharacterResult?.name ?? "N/A")"
         birthYearLabel.text = "Birth year: \(starWarsCharacterResult?.birthYear ?? "N/A")"
         eyeColorLabel.text = "Eye color: \(starWarsCharacterResult?.eyeColor ?? "N/A")"
         genderLabel.text = "Gender: \(starWarsCharacterResult?.gender ?? "N/A")"
-        homeWorldLabel.text = "Homeworld: \(homeWorld.name ?? "N/A")"
-        speciesLabel.text = "Specie: \(specie.name ?? "N/A")"
         heightLabel.text = "Height: \(starWarsCharacterResult?.height ?? "N/A")"
         massLabel.text = "Mass: \(starWarsCharacterResult?.mass ?? "N/A")"
         skinColorLabel.text = "Skin color: \(starWarsCharacterResult?.skinColor ?? "N/A")"
-    }
-    
-    func onGetCustomDetailError() {
-        print("error")
     }
 }
 

@@ -17,19 +17,17 @@ protocol PresenterToInteractorDetailScreenProtocol{
 
 protocol InteractorToPresenterDetailScreenProtocol{
     func onGetSpecieSuccess(specie: Specie)
-    func onGetHomeWorldSucvess (homeWorld: HomeWorld)
+    func onGetHomeWorldSuccess (homeWorld: HomeWorld)
     func onGetSpecieError()
     func onGetHomeWorldError()
     func onGetFavorites(starWarsCharacterResult: [StarWarsCharacterResult]?)
 }
 
 protocol PresenterToViewDetailScreenProtocol {
-    func onGetCustomDetailSuccess(specie: Specie, homeWorld: HomeWorld)
     func onGetSpecieSuccess(specie: Specie)
-    func onGetHomeWorldSucvess (homeWorld: HomeWorld)
+    func onGetHomeWorldSucess (homeWorld: HomeWorld)
     func onGetSpecieError()
     func onGetHomeWorldError()
-    func onGetCustomDetailError()
     func onGetFavorite(starWarsCharacterResult: [StarWarsCharacterResult]?)
 }
 

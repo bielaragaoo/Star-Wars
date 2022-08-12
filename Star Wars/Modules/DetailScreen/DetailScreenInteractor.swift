@@ -9,6 +9,14 @@ import Foundation
 import UIKit
 
 class DetailScreenInteractor: PresenterToInteractorDetailScreenProtocol {
+    func getSpecie(speciePath: String) {
+        domain.getSpecieDetail(speciePath: speciePath)
+    }
+    
+    func getHomeWorld(homeWorldPath: String) {
+        domain.getHomeWorldDetail(homeWorldPath: homeWorldPath)
+    }
+    
     var delegate: InteractorToPresenterDetailScreenProtocol?
     private let domain: DetailScreenDomain
     init(domain: DetailScreenDomain){
@@ -32,18 +40,22 @@ class DetailScreenInteractor: PresenterToInteractorDetailScreenProtocol {
             delegate?.onGetFavorites(starWarsCharacterResult: [])
         }
     }
-    
-    func getCustomDetail(speciePath: String, homeWorldPath: String) {
-        domain.getCustomDetail(speciePath: speciePath, homeWorldPath: homeWorldPath)
-    }
 }
 
 extension DetailScreenInteractor: DetailScreenResponseProtocol{
-    func responseCustomDetailSuccess(specieData: Specie, homeWorldData: HomeWorld) {
-        delegate?.onGetCustomDetailSuccess(specie: specieData, homeWorld: homeWorldData)
+    func responseSpecieSucess(specieData: Specie) {
+        delegate?.onGetSpecieSuccess(specie: specieData)
     }
     
-    func responseCustomDetailError(error: Error?) {
-        delegate?.onGetCustomDetailError()
+    func responseHomeWorldSucess(homeWorldData: HomeWorld) {
+        delegate?.onGetHomeWorldSuccess(homeWorld: homeWorldData)
+    }
+    
+    func responseSpecieError(error: Error?) {
+        delegate?.onGetSpecieError()
+    }
+    
+    func responseHomeWorldError(error: Error?) {
+        delegate?.onGetHomeWorldError()
     }
 }
