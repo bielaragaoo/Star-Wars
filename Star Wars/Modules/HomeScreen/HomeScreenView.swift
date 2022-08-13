@@ -59,7 +59,7 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(filterCharacters != nil && (filterCharacters ?? []).isEmpty) {
+        if(filterCharacters != nil && !(filterCharacters ?? []).isEmpty) {
             presenter?.router?.pushToDetailScreen(on: self, starWarsCharacterResult: filterCharacters![indexPath.row])
         } else {
             presenter?.router?.pushToDetailScreen(on: self, starWarsCharacterResult: characters![indexPath.row])
