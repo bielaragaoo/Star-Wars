@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSource, ViewInterface {
     var presenter: ViewToPresenterHomeScreenProtocol?
     var label: String?
     var identifier = "Cell reuse identifier"
@@ -23,6 +23,7 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         setupTabBar()
         presenter?.viewDidLoad(path: nil)
+        showLoading(showLoading: true)
         characterListTableView.prefetchDataSource = self
         characterListTableView.delegate = self
         characterListTableView.dataSource = self
@@ -58,7 +59,9 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(characters?[indexPath.row] != nil){
+        if(filterCharacters != nil && (filterCharacters ?? []).isEmpty) {
+            presenter?.router?.pushToDetailScreen(on: self, starWarsCharacterResult: filterCharacters![indexPath.row])
+        } else {
             presenter?.router?.pushToDetailScreen(on: self, starWarsCharacterResult: characters![indexPath.row])
         }
         
@@ -74,8 +77,9 @@ extension HomeScreenView: PresenterToViewHomeScreenProtocol {
         } else {
             self.characters! += starWarsCharacter.results
         }
-        
+        showLoading(showLoading: false)
         self.characterListTableView.reloadData()
+        
     }
     
     func onGetCharacterListError() {

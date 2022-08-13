@@ -49,6 +49,7 @@
 		52C745B2589D2BBB0E507814 /* Pods_Star_Wars_Star_WarsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B630B56195AA5A80E316CEA /* Pods_Star_Wars_Star_WarsUITests.framework */; };
 		58CF76A4AF9990947BDCD4C7 /* Pods_Star_WarsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9262778B254CF0EDCDCFCB /* Pods_Star_WarsTests.framework */; };
 		71463AB628A1FF8200097F88 /* LocalDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71463AB528A1FF8200097F88 /* LocalDatabaseManager.swift */; };
+		71463AB928A73BCD00097F88 /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71463AB828A73BCD00097F88 /* ViewInterface.swift */; };
 		9663C5D4F79EF5A2278589F5 /* Pods_Star_Wars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE2433A04C3614A1685B303 /* Pods_Star_Wars.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		4EE2433A04C3614A1685B303 /* Pods_Star_Wars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star_Wars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B630B56195AA5A80E316CEA /* Pods_Star_Wars_Star_WarsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star_Wars_Star_WarsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71463AB528A1FF8200097F88 /* LocalDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDatabaseManager.swift; sourceTree = "<group>"; };
+		71463AB828A73BCD00097F88 /* ViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
 		BF5A8EF8E9C3CF2E95468C14 /* Pods-Star Wars-Star WarsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star Wars-Star WarsUITests.release.xcconfig"; path = "Target Support Files/Pods-Star Wars-Star WarsUITests/Pods-Star Wars-Star WarsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C09CBBA9729B06EC797E8124 /* Pods-Star Wars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star Wars.debug.xcconfig"; path = "Target Support Files/Pods-Star Wars/Pods-Star Wars.debug.xcconfig"; sourceTree = "<group>"; };
 		C33343906A23BD0E9A813E18 /* Pods-Star Wars-Star WarsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star Wars-Star WarsUITests.debug.xcconfig"; path = "Target Support Files/Pods-Star Wars-Star WarsUITests/Pods-Star Wars-Star WarsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		295215912870BF7F00447B22 /* Star Wars */ = {
 			isa = PBXGroup;
 			children = (
+				71463AB728A73BB000097F88 /* Commom */,
 				291B5C202870E81800B56100 /* Domain */,
 				295215D72870D55D00447B22 /* Resources */,
 				295215D12870CCBB00447B22 /* Network */,
@@ -360,6 +363,14 @@
 				295BCAB8289C960A0046BD28 /* DetailScreenProvider.swift */,
 			);
 			path = DetailScreen;
+			sourceTree = "<group>";
+		};
+		71463AB728A73BB000097F88 /* Commom */ = {
+			isa = PBXGroup;
+			children = (
+				71463AB828A73BCD00097F88 /* ViewInterface.swift */,
+			);
+			path = Commom;
 			sourceTree = "<group>";
 		};
 		FDCDAD014A292A6066124028 /* Frameworks */ = {
@@ -636,6 +647,7 @@
 				295BCAAC289C905D0046BD28 /* Specie.swift in Sources */,
 				295BCAAE289C909B0046BD28 /* HomeWorld.swift in Sources */,
 				295215C52870C4D700447B22 /* HomeScreenContract.swift in Sources */,
+				71463AB928A73BCD00097F88 /* ViewInterface.swift in Sources */,
 				295BCAA2289C8E200046BD28 /* DetailScreenContract.swift in Sources */,
 				291B5C112870DA3C00B56100 /* NetworkInteractor.swift in Sources */,
 				295BCAB2289C92D70046BD28 /* HomeWorldResponse.swift in Sources */,
