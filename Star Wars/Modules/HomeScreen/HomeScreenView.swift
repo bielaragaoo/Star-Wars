@@ -103,13 +103,18 @@ extension HomeScreenView: UISearchResultsUpdating {
     }
     
     func setupTabBar(){
-        
         self.navigationItem.title = "Home Screen"
         let searchController = UISearchController()
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self as? UISearchBarDelegate
         self.navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
+        let favoriteIcon = UIImage(named: "fav-icon.png")?.withTintColor(UIColor.red).withRenderingMode(.alwaysOriginal) ?? UIImage()
+        let favItem = UIBarButtonItem(image: favoriteIcon, style: .plain, target: self, action: #selector(goToFav))
+        self.navigationItem.setRightBarButton(favItem, animated: false)
+    }
+    @objc func goToFav() { // remove @objc for Swift 3
+        presenter?.router?.pushToFavoriteScreen(on: self)
     }
 }
 
