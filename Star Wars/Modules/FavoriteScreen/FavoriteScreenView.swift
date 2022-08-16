@@ -48,12 +48,14 @@ extension FavoriteScreenView: UITableViewDelegate, UITableViewDataSource{
     
     func setupTableView(){
         favoriteTableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(favoriteTableView)
+        self.view.addSubview(favoriteTableView)
+        self.view.backgroundColor = .white
+        favoriteTableView.tableHeaderView = UIView()
         favoriteTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        favoriteTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        favoriteTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 48).isActive = true
+        favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48).isActive = true
         favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
+        favoriteTableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
     }
 }
 
