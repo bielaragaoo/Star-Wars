@@ -54,7 +54,7 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             cell.setup(starData: filterCharacters?[indexPath.row])
         }
-        
+        cell.delegate = self
         return cell
     }
     
@@ -115,6 +115,12 @@ extension HomeScreenView: UISearchResultsUpdating {
     }
     @objc func goToFav() { // remove @objc for Swift 3
         presenter?.router?.pushToFavoriteScreen(on: self)
+    }
+}
+
+extension HomeScreenView: favoriteCellProtocol{
+    func onFavoritePress() {
+        print("favoritado")
     }
 }
 

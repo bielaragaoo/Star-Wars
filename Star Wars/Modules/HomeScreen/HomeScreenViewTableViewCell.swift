@@ -8,12 +8,17 @@
 import Foundation
 import UIKit
 
+protocol favoriteCellProtocol {
+    func onFavoritePress()
+}
+
 class HomeScreenViewTableViewCell: UITableViewCell {
     var identifier = "Cell reuse identifier"
     let labelName = UILabel()
+    var delegate: favoriteCellProtocol?
     let labelHeight = UILabel()
     let labelBirthYear = UILabel()
-    
+    let favoriteButton = UIButton(type: .system)
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.distribution = .fill
@@ -23,15 +28,30 @@ class HomeScreenViewTableViewCell: UITableViewCell {
         return stack
     }()
     
+    
+    @objc func favorite () {
+        delegate?.onFavoritePress()
+    }
+    
     func configureCell(){
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(labelName)
         stackView.addArrangedSubview(labelHeight)
         stackView.addArrangedSubview(labelBirthYear)
+        contentView.addSubview(favoriteButton)
         
+        
+        favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
+        favoriteButton.setImage(UIImage(named: "no-fav-icon"), for: .normal)
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         labelName.translatesAutoresizingMaskIntoConstraints = false
         labelHeight.translatesAutoresizingMaskIntoConstraints = false
         labelBirthYear.translatesAutoresizingMaskIntoConstraints = false
+        
+        favoriteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        favoriteButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        favoriteButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24).isActive = true
         
         stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
