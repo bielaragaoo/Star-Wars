@@ -21,13 +21,6 @@ class DetailScreenPresenter: ViewToPresenterDetailScreenProtocol {
     
     var view: PresenterToViewDetailScreenProtocol?
     var interactor: PresenterToInteractorDetailScreenProtocol?
-    
-    func getFavorite() {
-        interactor?.getFavorite()
-    }
-    func saveFavorite(starWarsCharacterResult: [StarWarsCharacterResult]) {
-        interactor?.saveFavorite(starWarsCharacterResult: starWarsCharacterResult)
-    }
 }
 
 extension DetailScreenPresenter: InteractorToPresenterDetailScreenProtocol{
@@ -45,9 +38,5 @@ extension DetailScreenPresenter: InteractorToPresenterDetailScreenProtocol{
     
     func onGetHomeWorldError() {
         view?.onGetHomeWorldError()
-    }
-    
-    func onGetFavorites(starWarsCharacterResult: [StarWarsCharacterResult]?) {
-        view?.onGetFavorite(starWarsCharacterResult: starWarsCharacterResult)
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class DetailScreenView: UIViewController {
     var presenter: ViewToPresenterDetailScreenProtocol?
+    var favoritePresenter: ViewToPresenterFavoriteScreenProtocol?
     var starWarsCharacterResult: StarWarsCharacterResult?
     var favoriteCharacters: [StarWarsCharacterResult]?
     var nameLabel =  UILabel()
@@ -46,7 +47,7 @@ class DetailScreenView: UIViewController {
             homeWorldLabel.text = "HomeWorld: N/A"
         }
         
-        presenter?.getFavorite()
+        favoritePresenter?.getFavorites()
         setupLabel()
         setupUI()
     }
@@ -67,10 +68,6 @@ extension DetailScreenView: PresenterToViewDetailScreenProtocol{
     
     func onGetHomeWorldError() {
         print("error")
-    }
-    
-    func onGetFavorite(starWarsCharacterResult: [StarWarsCharacterResult]?) {
-        favoriteCharacters = starWarsCharacterResult ?? []
     }
     
     func setupLabel() {
@@ -110,11 +107,11 @@ extension DetailScreenView {
             favoriteCharacters?.removeAll(where: { character in
                 character.name == starWarsCharacterResult?.name
             })
-            presenter?.saveFavorite(starWarsCharacterResult:favoriteCharacters ??  [] )
+            favoritePresenter?.saveFavorites(starWarsCharacter:favoriteCharacters ??  [] )
             setFavItem(iconName: "no-fav-icon")
         } else {
             favoriteCharacters?.append(starWarsCharacterResult!)
-            presenter?.saveFavorite(starWarsCharacterResult: favoriteCharacters!)
+            favoritePresenter?.saveFavorites(starWarsCharacter: favoriteCharacters!)
             setFavItem(iconName: "fav-icon")
         }
     }
@@ -138,4 +135,15 @@ extension DetailScreenView {
             setFavItem(iconName: "no-fav-icon")
         }
     }
+}
+extension DetailScreenView: PresenterToViewFavoriteScreenProtocol {
+    func onGetFavoriteList(starWarsCharacter: [StarWarsCharacterResult]?) {
+            favoriteCharacters = starWarsCharacter ?? []
+    }
+    
+    func onSaveFavoriteListError() {
+        
+    }
+    
+    
 }

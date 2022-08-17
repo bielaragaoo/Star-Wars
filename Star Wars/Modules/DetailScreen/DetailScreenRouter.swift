@@ -13,18 +13,24 @@ class DetailScreenRouter: PresenterToRouterDetailScreenProtocol {
         let provider = DetailScreenProvider()
         let domain = DetailScreenDomain(provider: provider)
         let interactor = DetailScreenInteractor(domain: domain)
+        let favoriteInteractor = FavoriteScreenInteractor()
         
         domain.responseDetailCustom = interactor
         
         let viewController = DetailScreenView()
         
         let presenter: ViewToPresenterDetailScreenProtocol & InteractorToPresenterDetailScreenProtocol = DetailScreenPresenter()
+        let favoritePresenter: ViewToPresenterFavoriteScreenProtocol & InteractorToPresenterFavoriteScreenProtocol = FavoriteScreenPresenter()
+        viewController.favoritePresenter = favoritePresenter
+        viewController.favoritePresenter?.interactor = favoriteInteractor
+        viewController.favoritePresenter?.view = viewController
         viewController.presenter = presenter
         viewController.presenter?.interactor = interactor
-        viewController.starWarsCharacterResult = starWarsCharacterResult
         viewController.presenter?.view = viewController
+        viewController.starWarsCharacterResult = starWarsCharacterResult
         
         interactor.delegate = presenter
+        favoriteInteractor.delegate = favoritePresenter
         return viewController
     }
 }

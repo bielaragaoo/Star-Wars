@@ -22,24 +22,6 @@ class DetailScreenInteractor: PresenterToInteractorDetailScreenProtocol {
     init(domain: DetailScreenDomain){
         self.domain = domain
     }
-    
-    func saveFavorite(starWarsCharacterResult: [StarWarsCharacterResult]) {
-        do{
-           try LocalDatabaseManager.sharedInstance.saveFavorite(starWarsCharacterResult: starWarsCharacterResult)
-            self.getFavorite()
-        } catch {
-            print("error saving character list")
-        }
-    }
-    
-    func getFavorite() {
-        do {
-         let characterList = try LocalDatabaseManager.sharedInstance.getFavorites() as [StarWarsCharacterResult]
-            delegate?.onGetFavorites(starWarsCharacterResult: characterList)
-        } catch {
-            delegate?.onGetFavorites(starWarsCharacterResult: [])
-        }
-    }
 }
 
 extension DetailScreenInteractor: DetailScreenResponseProtocol{
