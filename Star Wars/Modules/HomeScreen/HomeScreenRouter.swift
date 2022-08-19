@@ -25,7 +25,7 @@ class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
         let provider = HomeScreenProvider()
         let domain = HomeScreenDomain(provider: provider)
         let interactor = HomeScreenInteractor(domain: domain)
-        
+        let favoriteInteractor = FavoriteScreenInteractor()
         
         domain.responseCharacterList = interactor
         
@@ -33,12 +33,16 @@ class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
         let navigationController = UINavigationController(rootViewController: viewController)
         
         let presenter: ViewToPresenterHomeScreenProtocol & InteractorToPresenterHomeScreenProtocol = HomeScreenPresenter()
+        let favoritePresenter: ViewToPresenterFavoriteScreenProtocol & InteractorToPresenterFavoriteScreenProtocol = FavoriteScreenPresenter()
+        viewController.favoritePresenter = favoritePresenter
+        viewController.favoritePresenter?.interactor = favoriteInteractor
+        viewController.favoritePresenter?.view = viewController
         viewController.presenter = presenter
         viewController.presenter?.interactor = interactor
         viewController.presenter?.view = viewController
         viewController.presenter?.router = HomeScreenRouter()
         interactor.delegate = presenter
-        
+        favoriteInteractor.delegate = favoritePresenter
       
         return navigationController
     }

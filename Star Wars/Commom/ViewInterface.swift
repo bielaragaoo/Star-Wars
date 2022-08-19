@@ -20,19 +20,25 @@ extension ViewInterface where Self: UIViewController {
             view.backgroundColor = UIColor.white
             view.tag = tag
             
-            let activityIndicator = UIActivityIndicatorView()
+            let loadingIndicator: ProgressiveView = {
+                let progress = ProgressiveView(colors: [.blue,.darkGray], lineWidth: 7)
+                progress.translatesAutoresizingMaskIntoConstraints = false
+                return progress
+            }()
+            view.addSubview(loadingIndicator)
             
-            activityIndicator.startAnimating()
-            activityIndicator.color = .black
-            view.addSubview(activityIndicator)
-            
-            activityIndicator.center =  view.center
+            loadingIndicator.animateStroke()
+                        
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            loadingIndicator.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            loadingIndicator.heightAnchor.constraint(equalToConstant: 50).isActive = true
             
             self.view.addSubview(view)
             
         } else {
             for views in self.view.subviews where views.tag == tag {
-                for activity in views.subviews where activity is UIActivityIndicatorView {
+                for activity in views.subviews where activity is ProgressiveView {
                     views.removeFromSuperview()
                 }
             }

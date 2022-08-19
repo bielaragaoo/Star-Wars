@@ -9,10 +9,12 @@ import UIKit
 
 class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSource, ViewInterface {
     var presenter: ViewToPresenterHomeScreenProtocol?
+    var favoritePresenter: ViewToPresenterFavoriteScreenProtocol?
     var label: String?
     var identifier = "Cell reuse identifier"
     var starData: StarWarsCharacter?
     var characters: [StarWarsCharacterResult]?
+    var favoriteCharacters: [StarWarsCharacterResult]?
     var filterCharacters: [StarWarsCharacterResult]?
     var indexNext: String?
     
@@ -23,6 +25,7 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         setupTabBar()
         presenter?.viewDidLoad(path: nil)
+        favoritePresenter?.getFavorites()
         showLoading(showLoading: true)
         characterListTableView.prefetchDataSource = self
         characterListTableView.delegate = self
@@ -46,13 +49,21 @@ class HomeScreenView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = characterListTableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeScreenViewTableViewCell
         if filterCharacters == nil  {
-            cell.setup(starData: characters?[indexPath.row])
+            cell.setup(starData: characters?[indexPath.row], index: indexPath.row, isCharacterFavorite: (favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
+                character.name == (!(filterCharacters ?? []).isEmpty ? filterCharacters?[indexPath.row].name : characters?[indexPath.row].name)
+            })))
         } else if ((filterCharacters ?? []).isEmpty) && !(self.navigationItem.searchController?.searchBar.text ?? "").isEmpty {
-            cell.setup(starData: nil)
+            cell.setup(starData: nil,index: indexPath.row, isCharacterFavorite: (favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
+                character.name == (!(filterCharacters ?? []).isEmpty ? filterCharacters?[indexPath.row].name : characters?[indexPath.row].name)
+            })))
         }else if ((filterCharacters ?? []).isEmpty) && self.navigationItem.searchController?.searchBar.text != nil{
-            cell.setup(starData: characters?[indexPath.row])
+            cell.setup(starData: characters?[indexPath.row], index: indexPath.row, isCharacterFavorite: (favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
+                character.name == (!(filterCharacters ?? []).isEmpty ? filterCharacters?[indexPath.row].name : characters?[indexPath.row].name)
+            })))
         } else {
-            cell.setup(starData: filterCharacters?[indexPath.row])
+            cell.setup(starData: filterCharacters?[indexPath.row], index: indexPath.row, isCharacterFavorite: (favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
+                character.name == (!(filterCharacters ?? []).isEmpty ? filterCharacters?[indexPath.row].name : characters?[indexPath.row].name)
+            })))
         }
         cell.delegate = self
         return cell
@@ -119,10 +130,33 @@ extension HomeScreenView: UISearchResultsUpdating {
 }
 
 extension HomeScreenView: favoriteCellProtocol{
-    func onFavoritePress() {
-        print("favoritado")
+    func onFavoritePress(index: Int) {
+        if(favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
+            character.name == (!(filterCharacters ?? []).isEmpty ? filterCharacters?[index].name : characters![index].name)
+        })){
+            favoriteCharacters?.removeAll(where: { character in
+                character.name == (!(filterCharacters ?? []).isEmpty ? filterCharacters?[index].name : characters![index].name)
+            })
+            favoritePresenter?.saveFavorites(starWarsCharacter:favoriteCharacters ??  [] )
+            self.characterListTableView.reloadData()
+        } else {
+            favoriteCharacters?.append((!(filterCharacters ?? []).isEmpty ? filterCharacters![index] : characters![index]))
+            favoritePresenter?.saveFavorites(starWarsCharacter: favoriteCharacters!)
+            self.characterListTableView.reloadData()
+        }
     }
 }
-
+extension HomeScreenView: PresenterToViewFavoriteScreenProtocol{
+    func onGetFavoriteList(starWarsCharacter: [StarWarsCharacterResult]?) {
+        favoriteCharacters = starWarsCharacter
+        self.characterListTableView.reloadData()
+    }
+    
+    func onSaveFavoriteListError() {
+        
+    }
+    
+    
+}
 
 

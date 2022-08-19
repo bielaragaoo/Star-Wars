@@ -10,6 +10,7 @@ import UIKit
 class FavoriteScreenView: UIViewController, ViewInterface {
     let favoriteTableView = UITableView()
     var favoriteCharacters: [StarWarsCharacterResult]?
+    
     var presenter: ViewToPresenterFavoriteScreenProtocol?
     let identifier = "Cell reuse identifier"
     override func viewDidLoad() {
@@ -42,7 +43,8 @@ extension FavoriteScreenView: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = favoriteTableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeScreenViewTableViewCell
-        cell.setup(starData: favoriteCharacters?[indexPath.row])
+        cell.setup(starData: favoriteCharacters?[indexPath.row], index: indexPath.row, isCharacterFavorite: true)
+        cell.delegate = self
         return cell
     }
     
@@ -64,3 +66,13 @@ extension FavoriteScreenView {
         self.navigationItem.title = "Favorite Screen"
     }
 }
+
+extension FavoriteScreenView: favoriteCellProtocol {
+    func onFavoritePress(index: Int) {
+     
+            favoriteCharacters?.remove(at: index) 
+            presenter?.saveFavorites(starWarsCharacter:favoriteCharacters ??  [] )
+            favoriteTableView.reloadData()
+        }
+    }
+

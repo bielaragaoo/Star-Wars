@@ -14,6 +14,9 @@
 		291B5C1D2870E34D00B56100 /* HomeScreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B5C1C2870E34D00B56100 /* HomeScreenProvider.swift */; };
 		291B5C1F2870E4C300B56100 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B5C1E2870E4C300B56100 /* NetworkManager.swift */; };
 		291B5C222870E82900B56100 /* HomeScreenDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B5C212870E82900B56100 /* HomeScreenDomain.swift */; };
+		292A986228AEFFFB0046B269 /* ProgressiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A986128AEFFFB0046B269 /* ProgressiveView.swift */; };
+		292A986428AF00170046B269 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A986328AF00170046B269 /* StrokeAnimation.swift */; };
+		292A986628AF03BF0046B269 /* ProgressiveShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A986528AF03BF0046B269 /* ProgressiveShapeLayer.swift */; };
 		2945B020287B9F3600316D2A /* HomeScreenViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2945B01F287B9F3600316D2A /* HomeScreenViewTableViewCell.swift */; };
 		2945B023287BA69200316D2A /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2945B021287BA69200316D2A /* HomeScreenView.swift */; };
 		2945B024287BA69200316D2A /* HomeScreenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2945B022287BA69200316D2A /* HomeScreenView.xib */; };
@@ -83,6 +86,9 @@
 		291B5C1C2870E34D00B56100 /* HomeScreenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenProvider.swift; sourceTree = "<group>"; };
 		291B5C1E2870E4C300B56100 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		291B5C212870E82900B56100 /* HomeScreenDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenDomain.swift; sourceTree = "<group>"; };
+		292A986128AEFFFB0046B269 /* ProgressiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressiveView.swift; sourceTree = "<group>"; };
+		292A986328AF00170046B269 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
+		292A986528AF03BF0046B269 /* ProgressiveShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressiveShapeLayer.swift; sourceTree = "<group>"; };
 		2945B01F287B9F3600316D2A /* HomeScreenViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewTableViewCell.swift; sourceTree = "<group>"; };
 		2945B021287BA69200316D2A /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		2945B022287BA69200316D2A /* HomeScreenView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScreenView.xib; sourceTree = "<group>"; };
@@ -380,6 +386,9 @@
 			isa = PBXGroup;
 			children = (
 				71463AB828A73BCD00097F88 /* ViewInterface.swift */,
+				292A986128AEFFFB0046B269 /* ProgressiveView.swift */,
+				292A986328AF00170046B269 /* StrokeAnimation.swift */,
+				292A986528AF03BF0046B269 /* ProgressiveShapeLayer.swift */,
 			);
 			path = Commom;
 			sourceTree = "<group>";
@@ -657,10 +666,12 @@
 				295215932870BF7F00447B22 /* AppDelegate.swift in Sources */,
 				295215D92870D58C00447B22 /* ReferencesStrings.swift in Sources */,
 				295BCAAA289C8EFC0046BD28 /* DetailScreenView.swift in Sources */,
+				292A986428AF00170046B269 /* StrokeAnimation.swift in Sources */,
 				71463AC028A9D5E400097F88 /* FavoriteScreenPresenter.swift in Sources */,
 				71463AC228A9D75F00097F88 /* FavoriteScreenRouter.swift in Sources */,
 				71463AC428A9D84800097F88 /* FavoriteScreenView.swift in Sources */,
 				295215C72870C4E500447B22 /* HomeScreenInteractor.swift in Sources */,
+				292A986228AEFFFB0046B269 /* ProgressiveView.swift in Sources */,
 				295215DB2870D6BE00447B22 /* NetworkStatus.swift in Sources */,
 				291B5C222870E82900B56100 /* HomeScreenDomain.swift in Sources */,
 				291B5C1D2870E34D00B56100 /* HomeScreenProvider.swift in Sources */,
@@ -674,6 +685,7 @@
 				295BCAAC289C905D0046BD28 /* Specie.swift in Sources */,
 				295BCAAE289C909B0046BD28 /* HomeWorld.swift in Sources */,
 				295215C52870C4D700447B22 /* HomeScreenContract.swift in Sources */,
+				292A986628AF03BF0046B269 /* ProgressiveShapeLayer.swift in Sources */,
 				71463AB928A73BCD00097F88 /* ViewInterface.swift in Sources */,
 				295BCAA2289C8E200046BD28 /* DetailScreenContract.swift in Sources */,
 				291B5C112870DA3C00B56100 /* NetworkInteractor.swift in Sources */,

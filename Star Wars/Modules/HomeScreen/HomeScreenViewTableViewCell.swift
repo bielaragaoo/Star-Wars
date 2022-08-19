@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol favoriteCellProtocol {
-    func onFavoritePress()
+    func onFavoritePress(index: Int)
 }
 
 class HomeScreenViewTableViewCell: UITableViewCell {
@@ -18,6 +18,7 @@ class HomeScreenViewTableViewCell: UITableViewCell {
     var delegate: favoriteCellProtocol?
     let labelHeight = UILabel()
     let labelBirthYear = UILabel()
+    var characterIndex: Int = 0
     let favoriteButton = UIButton(type: .system)
     let stackView: UIStackView = {
         let stack = UIStackView()
@@ -30,7 +31,7 @@ class HomeScreenViewTableViewCell: UITableViewCell {
     
     
     @objc func favorite () {
-        delegate?.onFavoritePress()
+        delegate?.onFavoritePress(index: characterIndex)
     }
     
     func configureCell(){
@@ -42,15 +43,15 @@ class HomeScreenViewTableViewCell: UITableViewCell {
         
         
         favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
-        favoriteButton.setImage(UIImage(named: "no-fav-icon"), for: .normal)
+//        favoriteButton.setImage(UIImage(named: isFavorite ? "fav-icon" : "no-fav-icon"), for: .normal)
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         labelName.translatesAutoresizingMaskIntoConstraints = false
         labelHeight.translatesAutoresizingMaskIntoConstraints = false
         labelBirthYear.translatesAutoresizingMaskIntoConstraints = false
         
         favoriteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        favoriteButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        favoriteButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+//        favoriteButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+//        favoriteButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24).isActive = true
         
         stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
@@ -59,10 +60,12 @@ class HomeScreenViewTableViewCell: UITableViewCell {
         stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
     }
     
-    func setup(starData: StarWarsCharacterResult?) {
+    func setup(starData: StarWarsCharacterResult?, index: Int, isCharacterFavorite: Bool) {
         labelName.text = starData?.name
         labelHeight.text = starData?.height
         labelBirthYear.text = starData?.birthYear
+        favoriteButton.setImage(UIImage(named: isCharacterFavorite ? "fav-icon" : "no-fav-icon"), for: .normal)
+        characterIndex = index
     }
     
  
