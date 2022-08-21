@@ -23,6 +23,7 @@ protocol ViewToPresenterHomeScreenProtocol {
     func searchCharacters(for searchText: String?)
     func favoriteCharacter(index: Int)
     func isFavoriteCharacter(index: Int) -> Bool
+    func updateInfo()
 }
 
 protocol PresenterToInteractorHomeScreenProtocol {

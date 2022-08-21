@@ -22,6 +22,11 @@ class HomeScreenView: UIViewController {
         characterListTableView.dataSource = self
         characterListTableView.register(HomeScreenViewTableViewCell.self, forCellReuseIdentifier: identifier)
     }
+    
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(false)
+        presenter.updateInfo()
+    }
 }
 
 extension HomeScreenView: PresenterToViewHomeScreenProtocol {

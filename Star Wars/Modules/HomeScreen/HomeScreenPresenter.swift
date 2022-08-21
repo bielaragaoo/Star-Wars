@@ -92,13 +92,20 @@ class HomeScreenPresenter: ViewToPresenterHomeScreenProtocol {
             favoriteInteractor.saveFavorites(starWarsCharacter: favoriteCharacters ?? [])
         } else {
             favoriteCharacters?.append(charactersInfo()[index])
-            favoriteInteractor.getFavorites()
+            favoriteInteractor.saveFavorites(starWarsCharacter: favoriteCharacters ?? [])
         }
+        view.reloadData()
     }
     
     func isFavoriteCharacter(index: Int) -> Bool{
         return isFavorited(index: index)
     }
+    
+    func updateInfo() {
+        favoriteInteractor.getFavorites()
+        view.reloadData()
+    }
+    
 }
 
 extension HomeScreenPresenter: InteractorToPresenterHomeScreenProtocol {
