@@ -86,6 +86,7 @@ extension DetailScreenView {
         view.backgroundColor = .white
         setupFavStartIcon()
         self.navigationItem.title = "Detail Screen"
+        
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(birthYearLabel)
         stackView.addArrangedSubview(eyeColorLabel)
@@ -95,6 +96,7 @@ extension DetailScreenView {
         stackView.addArrangedSubview(heightLabel)
         stackView.addArrangedSubview(massLabel)
         stackView.addArrangedSubview(skinColorLabel)
+        
         view.addSubview(stackView)
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true

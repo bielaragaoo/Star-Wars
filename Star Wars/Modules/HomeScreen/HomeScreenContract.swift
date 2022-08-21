@@ -8,17 +8,21 @@
 import Foundation
 import UIKit
 
-protocol PresenterToViewHomeScreenProtocol {
-    func onGetCharacterListSucess(_ starWarsCharacter: StarWarsCharacter)
-    func onGetCharacterListError()
+protocol PresenterToViewHomeScreenProtocol: ViewInterface {
+    func reloadData()
+    func showLoadingPage(show: Bool)
 }
 
-protocol ViewToPresenterHomeScreenProtocol {
-    var view: PresenterToViewHomeScreenProtocol? { get set }
-    var interactor: PresenterToInteractorHomeScreenProtocol? { get set }
-    var router: PresenterToRouterHomeScreenProtocol? { get set }
-    
+protocol ViewToPresenterHomeScreenProtocol {    
     func viewDidLoad(path: String?)
+    func goToFavoriteScreen()
+    func goToDetailScreen(index: Int)
+    func tableViewCount() -> Int
+    func charactersInfo() -> [StarWarsCharacterResult]
+    func prefetchStarWarsData()
+    func searchCharacters(for searchText: String?)
+    func favoriteCharacter(index: Int)
+    func isFavoriteCharacter(index: Int) -> Bool
 }
 
 protocol PresenterToInteractorHomeScreenProtocol {

@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
+final class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
     func pushToFavoriteScreen(on view: PresenterToViewHomeScreenProtocol) {
         let favoriteScreenViewController = FavoriteScreenRouter.createModule()
-        let viewController = view as! HomeScreenView
+        guard let viewController = view as? HomeScreenView else {return}
         viewController.navigationController?.pushViewController(favoriteScreenViewController, animated: true)
     }
     
     func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, starWarsCharacterResult: StarWarsCharacterResult){
         let detailScreenViewController = DetailScreenRouter.createModule(starWarsCharacterResult: starWarsCharacterResult)
-        let viewController = view as! HomeScreenView
+        guard let viewController = view as? HomeScreenView else {return }
         viewController.navigationController?.pushViewController(detailScreenViewController, animated: true)
     }
     
@@ -26,24 +26,17 @@ class HomeScreenRouter: PresenterToRouterHomeScreenProtocol {
         let domain = HomeScreenDomain(provider: provider)
         let interactor = HomeScreenInteractor(domain: domain)
         let favoriteInteractor = FavoriteScreenInteractor()
-        
+        let router = HomeScreenRouter()
         domain.responseCharacterList = interactor
         
         let viewController = HomeScreenView()
         let navigationController = UINavigationController(rootViewController: viewController)
         
-        let presenter: ViewToPresenterHomeScreenProtocol & InteractorToPresenterHomeScreenProtocol = HomeScreenPresenter()
-        let favoritePresenter: ViewToPresenterFavoriteScreenProtocol & InteractorToPresenterFavoriteScreenProtocol = FavoriteScreenPresenter()
-        viewController.favoritePresenter = favoritePresenter
-        viewController.favoritePresenter?.interactor = favoriteInteractor
-        viewController.favoritePresenter?.view = viewController
-        viewController.presenter = presenter
-        viewController.presenter?.interactor = interactor
-        viewController.presenter?.view = viewController
-        viewController.presenter?.router = HomeScreenRouter()
+        let presenter = HomeScreenPresenter(view: viewController, interactor: interactor, favoriteInteractor: favoriteInteractor, router: router)
+        
         interactor.delegate = presenter
-        favoriteInteractor.delegate = favoritePresenter
-      
+        favoriteInteractor.delegate = presenter
+        viewController.presenter = presenter
         return navigationController
     }
     

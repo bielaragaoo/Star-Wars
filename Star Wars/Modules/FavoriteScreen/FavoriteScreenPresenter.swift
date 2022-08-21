@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class FavoriteScreenPresenter: ViewToPresenterFavoriteScreenProtocol{
     var router: PresenterToRouterFavoriteScreenProtocol?
     var view: PresenterToViewFavoriteScreenProtocol?

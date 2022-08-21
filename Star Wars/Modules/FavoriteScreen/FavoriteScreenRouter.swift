@@ -24,7 +24,7 @@ class FavoriteScreenRouter: PresenterToRouterFavoriteScreenProtocol{
     
     func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, starWarsCharacterResult: StarWarsCharacterResult) {
         let detailScreenViewController = DetailScreenRouter.createModule(starWarsCharacterResult: starWarsCharacterResult)
-        let viewController = view as! HomeScreenView
+        guard let viewController = view as? HomeScreenView else {return }
         viewController.navigationController?.pushViewController(detailScreenViewController, animated: true)
     }
     

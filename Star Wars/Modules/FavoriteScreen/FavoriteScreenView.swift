@@ -42,7 +42,7 @@ extension FavoriteScreenView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = favoriteTableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! HomeScreenViewTableViewCell
+        guard let cell = favoriteTableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? HomeScreenViewTableViewCell else {return UITableViewCell()}
         cell.setup(starData: favoriteCharacters?[indexPath.row], index: indexPath.row, isCharacterFavorite: true)
         cell.delegate = self
         return cell
@@ -69,7 +69,6 @@ extension FavoriteScreenView {
 
 extension FavoriteScreenView: favoriteCellProtocol {
     func onFavoritePress(index: Int) {
-     
             favoriteCharacters?.remove(at: index) 
             presenter?.saveFavorites(starWarsCharacter:favoriteCharacters ??  [] )
             favoriteTableView.reloadData()

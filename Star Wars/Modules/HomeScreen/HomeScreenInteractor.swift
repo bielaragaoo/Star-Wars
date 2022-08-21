@@ -15,7 +15,7 @@ class HomeScreenInteractor: PresenterToInteractorHomeScreenProtocol {
     private let domain: HomeScreenDomain
     
     init(domain: HomeScreenDomain){
-    self.domain = domain
+        self.domain = domain
     }
     
     func getCharacters(path: String?) {
