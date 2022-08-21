@@ -131,7 +131,7 @@ extension HomeScreenPresenter: InteractorToPresenterFavoriteScreenProtocol{
     }
 }
 
-extension HomeScreenPresenter {
+private extension HomeScreenPresenter {
     func hasFilteredCharacters() -> Bool{
         if((filterCharacters ?? []).isEmpty && !((searchText ?? "").count > searchMinimumCount)){
             return false

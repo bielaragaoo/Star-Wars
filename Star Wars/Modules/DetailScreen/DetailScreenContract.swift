@@ -20,20 +20,21 @@ protocol InteractorToPresenterDetailScreenProtocol{
     func onGetHomeWorldError()
 }
 
-protocol PresenterToViewDetailScreenProtocol {
-    func onGetSpecieSuccess(specie: Specie)
-    func onGetHomeWorldSucess (homeWorld: HomeWorld)
+protocol PresenterToViewDetailScreenProtocol: ViewInterface {
+    func showLoadingPage(show: Bool)
     func onGetSpecieError()
     func onGetHomeWorldError()
+    func setupLabels(starWarsCharactersResult: StarWarsCharacterResult?, specieName: String, homeworldName: String)
+    func changeFavIconStatus(isFavorite: Bool)
 }
 
 protocol ViewToPresenterDetailScreenProtocol {
-    var view: PresenterToViewDetailScreenProtocol? { get set }
-    var interactor: PresenterToInteractorDetailScreenProtocol? { get set }
-    var router: PresenterToRouterDetailScreenProtocol? { get set }
-    
-    func getSpecie(speciePath: String)
-    func getHomeWorld(homeWorldPath: String)
+    var starWarsCharacterResult: StarWarsCharacterResult? {get}
+    func getSpecie()
+    func getHomeWorld()
+    func onFavPressed()
+    func isFavorite() -> Bool
+    func getFavoriteCharacters()
 }
 
 protocol PresenterToRouterDetailScreenProtocol {

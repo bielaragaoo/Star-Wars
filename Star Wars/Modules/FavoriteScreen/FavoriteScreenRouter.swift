@@ -10,16 +10,16 @@ import UIKit
 class FavoriteScreenRouter: PresenterToRouterFavoriteScreenProtocol{
     static func createModule() -> UIViewController {
         
-            let interactor = FavoriteScreenInteractor()
-            let viewController = FavoriteScreenView()
-            let presenter: ViewToPresenterFavoriteScreenProtocol & InteractorToPresenterFavoriteScreenProtocol = FavoriteScreenPresenter()
-            viewController.presenter = presenter
-            viewController.presenter?.interactor = interactor
-            viewController.presenter?.view = viewController
-            
-            interactor.delegate = presenter
+        let interactor = FavoriteScreenInteractor()
+        let viewController = FavoriteScreenView()
+        let router = FavoriteScreenRouter()
+        let presenter = FavoriteScreenPresenter(router: router, view: viewController, interactor: interactor)
         
-            return viewController
+        
+        interactor.delegate = presenter
+        viewController.presenter = presenter
+        
+        return viewController
     }
     
     func pushToDetailScreen(on view: PresenterToViewHomeScreenProtocol, starWarsCharacterResult: StarWarsCharacterResult) {

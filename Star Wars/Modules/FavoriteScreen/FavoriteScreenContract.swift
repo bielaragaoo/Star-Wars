@@ -8,17 +8,16 @@
 import UIKit
 
 protocol PresenterToViewFavoriteScreenProtocol {
-    func onGetFavoriteList(starWarsCharacter: [StarWarsCharacterResult]?)
-    func onSaveFavoriteListError()
+    func reloadData()
+    func saveFavoriteListError()
 }
 
 protocol ViewToPresenterFavoriteScreenProtocol {
-    var view: PresenterToViewFavoriteScreenProtocol? { get set }
-    var interactor: PresenterToInteractorFavoriteScreenProtocol? { get set }
-    var router: PresenterToRouterFavoriteScreenProtocol? { get set }
-    
     func getFavorites()
     func saveFavorites(starWarsCharacter: [StarWarsCharacterResult])
+    func favoriteTableViewCount() -> Int
+    func favoriteCharactersOnView() -> [StarWarsCharacterResult]?
+    func onPressToFavorite(index: Int)
 }
 
 protocol PresenterToInteractorFavoriteScreenProtocol {

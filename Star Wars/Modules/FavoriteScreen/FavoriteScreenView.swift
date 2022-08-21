@@ -8,8 +8,13 @@
 import Foundation
 import UIKit
 class FavoriteScreenView: UIViewController, ViewInterface {
-    let favoriteTableView = UITableView()
-    var favoriteCharacters: [StarWarsCharacterResult]?
+    lazy private var favoriteTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.tableHeaderView = UIView()
+        tableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     var presenter: ViewToPresenterFavoriteScreenProtocol?
     let identifier = "Cell reuse identifier"
@@ -25,39 +30,26 @@ class FavoriteScreenView: UIViewController, ViewInterface {
 }
 
 extension FavoriteScreenView: PresenterToViewFavoriteScreenProtocol {
-    func onGetFavoriteList(starWarsCharacter: [StarWarsCharacterResult]?) {
-        favoriteCharacters = starWarsCharacter
-        showLoading(showLoading: false)
+    func reloadData() {
         favoriteTableView.reloadData()
     }
     
-    func onSaveFavoriteListError() {
-        print("error")
+    func saveFavoriteListError() {
+        print("error on fav")
     }
 }
 
 extension FavoriteScreenView: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteCharacters?.count ?? 1
+        return presenter?.favoriteTableViewCount() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = favoriteTableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? HomeScreenViewTableViewCell else {return UITableViewCell()}
-        cell.setup(starData: favoriteCharacters?[indexPath.row], index: indexPath.row, isCharacterFavorite: true)
+        guard let favoriteCharacters = presenter?.favoriteCharactersOnView() else {return UITableViewCell()}
+        cell.setup(starData: favoriteCharacters[indexPath.row], index: indexPath.row, isCharacterFavorite: true)
         cell.delegate = self
         return cell
-    }
-    
-    func setupTableView(){
-        favoriteTableView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(favoriteTableView)
-        self.view.backgroundColor = .white
-        favoriteTableView.tableHeaderView = UIView()
-        favoriteTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        favoriteTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 48).isActive = true
-        favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48).isActive = true
-        favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        favoriteTableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
     }
 }
 
@@ -65,13 +57,19 @@ extension FavoriteScreenView {
     func setupNavBar(){
         self.navigationItem.title = "Favorite Screen"
     }
+    func setupTableView(){
+        self.view.addSubview(favoriteTableView)
+        self.view.backgroundColor = .white
+        favoriteTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        favoriteTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 48).isActive = true
+        favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48).isActive = true
+        favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
 }
 
 extension FavoriteScreenView: favoriteCellProtocol {
     func onFavoritePress(index: Int) {
-            favoriteCharacters?.remove(at: index) 
-            presenter?.saveFavorites(starWarsCharacter:favoriteCharacters ??  [] )
-            favoriteTableView.reloadData()
+        presenter?.onPressToFavorite(index: index)
         }
     }
 

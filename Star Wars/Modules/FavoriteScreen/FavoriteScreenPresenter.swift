@@ -8,27 +8,48 @@
 import Foundation
 
 class FavoriteScreenPresenter: ViewToPresenterFavoriteScreenProtocol{
-    var router: PresenterToRouterFavoriteScreenProtocol?
-    var view: PresenterToViewFavoriteScreenProtocol?
-    var interactor: PresenterToInteractorFavoriteScreenProtocol?
+    private var router: PresenterToRouterFavoriteScreenProtocol
+    private var view: PresenterToViewFavoriteScreenProtocol
+    private var interactor: PresenterToInteractorFavoriteScreenProtocol
+    
+    private var favoriteCharacters: [StarWarsCharacterResult]?
+    
+    init(router: PresenterToRouterFavoriteScreenProtocol, view: PresenterToViewFavoriteScreenProtocol, interactor: PresenterToInteractorFavoriteScreenProtocol){
+        self.router = router
+        self.view = view
+        self.interactor = interactor
+    }
     
     func getFavorites() {
-        interactor?.getFavorites()
+        interactor.getFavorites()
     }
     
     func saveFavorites(starWarsCharacter: [StarWarsCharacterResult]) {
-        interactor?.saveFavorites(starWarsCharacter: starWarsCharacter)
+        interactor.saveFavorites(starWarsCharacter: starWarsCharacter)
     }
+    
+    func favoriteTableViewCount() -> Int {
+        return favoriteCharacters?.count ?? 0
+    }
+    
+    func favoriteCharactersOnView() -> [StarWarsCharacterResult]? {
+        return favoriteCharacters
+    }
+    
+    func onPressToFavorite(index: Int) {
+        favoriteCharacters?.remove(at: index)
+        interactor.saveFavorites(starWarsCharacter:favoriteCharacters ??  [] )
+        view.reloadData()
+    }
+    
 }
 
 extension FavoriteScreenPresenter: InteractorToPresenterFavoriteScreenProtocol {
     func onGetFavoriteList(favoriteList: [StarWarsCharacterResult]?) {
-        view?.onGetFavoriteList(starWarsCharacter: favoriteList)
+        favoriteCharacters = favoriteList
     }
     
     func onSaveCharacterListError() {
-        view?.onSaveFavoriteListError()
+        view.saveFavoriteListError()
     }
-    
-    
 }

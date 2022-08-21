@@ -10,21 +10,18 @@ import UIKit
 
 class DetailScreenView: UIViewController {
     var presenter: ViewToPresenterDetailScreenProtocol?
-    var favoritePresenter: ViewToPresenterFavoriteScreenProtocol?
-    var starWarsCharacterResult: StarWarsCharacterResult?
-    var favoriteCharacters: [StarWarsCharacterResult]?
-    var nameLabel =  UILabel()
-    var birthYearLabel = UILabel()
-    var eyeColorLabel = UILabel()
-    var genderLabel = UILabel()
-    var homeWorldLabel = UILabel()
-    var speciesLabel = UILabel()
-    var heightLabel = UILabel()
-    var massLabel = UILabel()
-    var skinColorLabel = UILabel()
-    var favoriteIcon = UIImage()
+    lazy private var nameLabel =  UILabel()
+    lazy private var birthYearLabel = UILabel()
+    lazy private var eyeColorLabel = UILabel()
+    lazy private var genderLabel = UILabel()
+    lazy private var homeWorldLabel = UILabel()
+    lazy private var speciesLabel = UILabel()
+    lazy private var heightLabel = UILabel()
+    lazy private var massLabel = UILabel()
+    lazy private var skinColorLabel = UILabel()
+    lazy private var favoriteIcon = UIImage()
     
-    let stackView: UIStackView = {
+    lazy private var stackView: UIStackView = {
         let stack = UIStackView()
         stack.distribution = .fill
         stack.axis = .vertical
@@ -35,31 +32,25 @@ class DetailScreenView: UIViewController {
         return stack
     }()
     override func viewDidLoad() {
-        if(starWarsCharacterResult?.species.first != nil) {
-            presenter?.getSpecie(speciePath: (starWarsCharacterResult?.species.first ?? nil)!)
-        } else {
-            speciesLabel.text = "Specie: N/A"
-        }
-        
-        if(starWarsCharacterResult?.homeWorld != nil) {
-            presenter?.getHomeWorld(homeWorldPath: (starWarsCharacterResult?.homeWorld)!)
-        } else {
-            homeWorldLabel.text = "HomeWorld: N/A"
-        }
-        
-        favoritePresenter?.getFavorites()
-        setupLabel()
+        presenter?.getHomeWorld()
+        presenter?.getSpecie()
+        presenter?.getFavoriteCharacters()
         setupUI()
     }
 }
 
 extension DetailScreenView: PresenterToViewDetailScreenProtocol{
-    func onGetSpecieSuccess(specie: Specie) {
-        speciesLabel.text = "Specie: \(specie.name ?? "N/A")"
+    func changeFavIconStatus(isFavorite: Bool) {
+        setFavItem(iconName: isFavorite ? "fav-icon" : "no-fav-icon")
     }
     
-    func onGetHomeWorldSucess(homeWorld: HomeWorld) {
-        homeWorldLabel.text = "Homeworld: \(homeWorld.name ?? "N/A")"
+    func setupLabels(starWarsCharactersResult: StarWarsCharacterResult?, specieName: String, homeworldName: String) {
+        setupLabel(starWarsCharacterResult: starWarsCharactersResult, specieName: specieName, homeworldName: homeworldName)
+    }
+    
+    
+    func showLoadingPage(show: Bool) {
+        showLoading(showLoading: show)
     }
     
     func onGetSpecieError() {
@@ -70,7 +61,7 @@ extension DetailScreenView: PresenterToViewDetailScreenProtocol{
         print("error")
     }
     
-    func setupLabel() {
+    func setupLabel(starWarsCharacterResult: StarWarsCharacterResult?, specieName: String, homeworldName: String) {
         nameLabel.text = "Name: \(starWarsCharacterResult?.name ?? "N/A")"
         birthYearLabel.text = "Birth year: \(starWarsCharacterResult?.birthYear ?? "N/A")"
         eyeColorLabel.text = "Eye color: \(starWarsCharacterResult?.eyeColor ?? "N/A")"
@@ -78,10 +69,12 @@ extension DetailScreenView: PresenterToViewDetailScreenProtocol{
         heightLabel.text = "Height: \(starWarsCharacterResult?.height ?? "N/A")"
         massLabel.text = "Mass: \(starWarsCharacterResult?.mass ?? "N/A")"
         skinColorLabel.text = "Skin color: \(starWarsCharacterResult?.skinColor ?? "N/A")"
+        speciesLabel.text = "Specie: \(specieName)"
+        homeWorldLabel.text = "Homeworld: \(homeworldName)"
     }
 }
 
-extension DetailScreenView {
+private extension DetailScreenView {
     func setupUI(){
         view.backgroundColor = .white
         setupFavStartIcon()
@@ -103,19 +96,7 @@ extension DetailScreenView {
     }
     
     @objc func fav() { // remove @objc for Swift 3
-        if(favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
-            character.name == starWarsCharacterResult?.name
-        })){
-            favoriteCharacters?.removeAll(where: { character in
-                character.name == starWarsCharacterResult?.name
-            })
-            favoritePresenter?.saveFavorites(starWarsCharacter:favoriteCharacters ??  [] )
-            setFavItem(iconName: "no-fav-icon")
-        } else {
-            favoriteCharacters?.append(starWarsCharacterResult!)
-            favoritePresenter?.saveFavorites(starWarsCharacter: favoriteCharacters!)
-            setFavItem(iconName: "fav-icon")
-        }
+        presenter?.onFavPressed()
     }
     
     func setFavItem(iconName: String) {
@@ -129,23 +110,12 @@ extension DetailScreenView {
     }
     
     func setupFavStartIcon(){
-        if(favoriteCharacters != nil && favoriteCharacters!.contains(where: { character in
-            character.name == starWarsCharacterResult?.name
-        })){
+        guard let isFavorite = presenter?.isFavorite() else {return }
+        if(isFavorite){
             setFavItem(iconName: "fav-icon")
         } else {
             setFavItem(iconName: "no-fav-icon")
         }
     }
 }
-extension DetailScreenView: PresenterToViewFavoriteScreenProtocol {
-    func onGetFavoriteList(starWarsCharacter: [StarWarsCharacterResult]?) {
-            favoriteCharacters = starWarsCharacter ?? []
-    }
-    
-    func onSaveFavoriteListError() {
-        
-    }
-    
-    
-}
+

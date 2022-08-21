@@ -20,7 +20,7 @@ struct StarWarsCharacterResult: Codable {
     let gender: String?
     let name: String?
     let homeWorld: String?
-    let species: [String?]
+    let species: [String]?
     let height: String?
     let mass: String?
     let skinColor: String?
